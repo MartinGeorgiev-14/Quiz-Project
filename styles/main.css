@@ -1,0 +1,212 @@
+:root{
+    --text-color: gold;
+    --button-text-color: black;
+    --header-color: red;
+    --header-border-color: dimgray;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100vh;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--header-border-color);
+}
+
+.heading a {
+    position: absolute;
+    right: 3%;
+    text-decoration: none;
+    color: var(--button-text-color  );
+    background-color: aqua;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.heading a:hover{
+    background-color: rgb(159, 255, 255);
+    transition: ease-in-out 0.1s;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    height: 80%;
+}
+
+/*Start of welcome message and button*/
+
+#mainContainerMessage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10rem;
+    background-color: brown;
+    margin-top: 4rem;
+    border-radius: 1.5rem;
+    width: 90%;
+    height: 100%;
+}
+
+#mainContainerMessage h1{
+    font-size: 4rem;
+    color: var(--text-color);
+}
+
+#mainContainerMessage button{
+    background-color: aqua;
+    width: 15%;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#mainContainerMessage button:hover{
+    background-color: rgb(160, 255, 255);
+}
+
+/*End of welcome message and button*/
+
+/*Start of the question container*/
+
+
+#mainContainerQuestion{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: brown;
+    margin-top: 4rem;
+    border-radius: 1.5rem;
+    width: 90%;
+    height: 100%;
+}
+
+#mainContainerQuestion #top{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;    
+}
+
+#top h1{
+    font-size: 2rem;
+}
+
+#top p {
+    position: absolute;
+    right: 7%;
+    font-size: 3rem;
+}
+
+#top p span {
+    font-weight: bold;
+}
+
+#questionForm{
+    background-color: burlywood;
+    height: 80%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+#mainContainerQuestion .container{
+    font-size: 2rem;
+    background-color: aqua;
+    width: 90%;
+    display: flex;
+}
+
+#mainContainerQuestion .container p{
+    margin-left: 0.3rem;
+}
+
+#nextFinish{
+    position: relative;
+    left: 40%;
+    background-color: aqua;
+    width: 5rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+#nextFinish:hover{
+    background-color: rgb(157, 253, 253);
+    cursor: pointer;
+}
+
+/*End of the question container*/
+
+
+/*Start of the results container*/
+
+#mainContainerResult{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10rem;
+    background-color: brown;
+    margin-top: 4rem;
+    border-radius: 1.5rem;
+    width: 90%;
+    height: 100%;
+}
+
+#score{
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#score ul{
+    list-style-type: none;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#score ul::first-line{
+    font-weight: bold;
+}
+
+
+#mainContainerResult h1{
+    font-size: 4rem;
+    color: var(--text-color);
+}
+
+#mainContainerResult button{
+    background-color: aqua;
+    width: 15%;
+    padding: 0.5rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/*End of the results container */

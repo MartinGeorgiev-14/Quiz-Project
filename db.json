@@ -1,0 +1,20 @@
+{
+    "questions": [
+        {   
+            "questionType": "oneAnswer",
+            "questionTitle": "First Question 1",
+            "answers": ["ans1", "ans2", "ans3", "ans4"],
+            "correctAnswer" : 0,
+            "pointsGiven" : 5,
+            "id": 0
+        },
+        {   
+            "questionType": "oneAnswer",
+            "questionTitle": "Second Question 2",
+            "answers": ["ans1", "ans2", "ans3", "ans4"],
+            "correctAnswer" : 1,
+            "pointsGiven" : 5,
+            "id": 1
+        }
+    ]
+}

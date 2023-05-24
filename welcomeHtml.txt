@@ -1,0 +1,4 @@
+<div id="mainContainerMessage">
+        <h1>Welcome to the quiz game</h1>
+        <button onclick="startQuiz()">Start</button>
+     </div>
