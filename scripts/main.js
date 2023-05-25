@@ -1,6 +1,7 @@
 const url = "http://localhost:3000/questions";
 const startButton = document.getElementById("start");
 const mainContainer = document.getElementById("mainContainerMessage");
+let earnedPoints = 0;
 let totalPoints = 0;
 
 // Removing the start menu
@@ -20,7 +21,7 @@ async function displayQuestion(question)
    {
     let numberQuestion = 0;
 
-    console.log(i);
+    //Creating and appending the heading of the question and continue button
     const topHead = createNode("div");
     const questionTitle = createNode("h2");
     const questionNum = createNode("p");
@@ -41,6 +42,7 @@ async function displayQuestion(question)
     questionNum.innerHTML = i+1 + "/" + questionsLenght;
     nextFnishButton.innerHTML = "Next";
 
+    //Creating and appending the question inputs
     question[i].answers.forEach(element => {
         
         const questionLabel = createNode("label");
@@ -49,7 +51,8 @@ async function displayQuestion(question)
 
         radioInput.setAttribute("type", "radio");
         radioInput.setAttribute("id", "answer" + numberQuestion);
-        radioInput.setAttribute("name", "radio");
+        radioInput.setAttribute("name", "question");
+        radioInput.setAttribute("value", numberQuestion);
         questionLabel.setAttribute("class", "container");
 
         append(questionForm, questionLabel);
@@ -61,10 +64,25 @@ async function displayQuestion(question)
     });
 
     await waitForClick(nextFnishButton);
-    
+    const radioButtons = document.querySelectorAll('input[name="question"]')
+    let selectedAnswer;
 
+    //Suming the points of the question
+    for(const radioButton of radioButtons)
+    { 
+        if(radioButton.checked)
+        {
+            selectedAnswer = radioButton.value;
+        }
+        if(selectedAnswer == question[i].correctAnswer)
+        {
+            earnedPoints += question[i].pointsGiven;  
+        }
+        totalPoints += question[i].pointsGiven;
+        break;
+    }
+  
     removeNodes(mainContainer);
-
    }
 }
 

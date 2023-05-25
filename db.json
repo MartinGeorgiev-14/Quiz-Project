@@ -15,6 +15,14 @@
             "correctAnswer" : 1,
             "pointsGiven" : 5,
             "id": 1
+        },
+        {   
+            "questionType": "oneAnswer",
+            "questionTitle": "Third Question 3",
+            "answers": ["ans1", "ans2", "ans3", "ans4"],
+            "correctAnswer" : 2,
+            "pointsGiven" : 2,
+            "id": 2
         }
     ]
 }
