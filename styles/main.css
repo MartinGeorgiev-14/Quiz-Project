@@ -198,7 +198,13 @@ main{
     color: var(--text-color);
 }
 
-#mainContainerResult button{
+#buttonContainer{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#mainContainerResult div button{
     background-color: aqua;
     width: 15%;
     padding: 0.5rem;

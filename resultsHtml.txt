@@ -1,18 +1,21 @@
-      <div id="mainContainerResult">
-        <h1>Your Results</h1>
-        <div id="score">
-           <ul>
-            <li>Points</li>
-            <li>5/10</li>
-           </ul>
-           <ul>
-            <li>Percentage</li>
-            <li>89%</li>
-           </ul>
-           <ul>
-            <li>Grade</li>
-            <li>4</li>
-           </ul>     
-        </div>
-        <button id="start" onclick="restart()">Restart</button>
-     </div>
+ <div id="mainContainerResult">
+            <h1>Your Results</h1>
+            <div id="score">
+               <ul>
+                <li>Points</li>
+                <li>5/10</li>
+               </ul>
+               <ul>
+                <li>Percentage</li>
+                <li>89%</li>
+               </ul>
+               <ul>
+                <li>Grade</li>
+                <li>4</li>
+               </ul>     
+            </div>
+            <div id="buttonContainer">
+                <button id="home">Home</button>
+                <button id="restart">Restart</button>
+            </div>
+         </div>

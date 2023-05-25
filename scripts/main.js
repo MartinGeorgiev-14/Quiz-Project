@@ -7,8 +7,27 @@ let totalPoints = 0;
 // Removing the start menu
 function startQuiz(){
         removeNodes(mainContainer);
-        mainContainer.setAttribute("id", "mainContainerQuestion");
         getQuestion(url);
+}
+
+// Displaying home
+function displayHome()
+{
+    const headingMes = createNode("h1");
+    const startButton = createNode("button");
+
+    mainContainer.setAttribute("id", "mainContainerMessage");
+    
+    append(mainContainer, headingMes);
+    append(mainContainer, startButton);
+
+    headingMes.innerHTML = "Welcome to the quiz game";
+    startButton.innerHTML = "Start";
+
+    startButton.addEventListener("click", function(event)
+    {
+        startQuiz();
+    })
 }
 
 // Displaying question
@@ -77,25 +96,27 @@ async function displayQuestion(question)
     //Suming the points of the question
     const radioButtons = document.querySelectorAll('input[name="question"]')
     let selectedAnswer;
-
+   
     for(const radioButton of radioButtons)
     { 
-        if(radioButton.checked)
-        {
-            selectedAnswer = radioButton.value;
+        if(radioButton.checked){
+        selectedAnswer = radioButton.value;
         }
+     
         if(selectedAnswer == question[i].correctAnswer)
         {
-            earnedPoints += question[i].pointsGiven;  
+            
+            earnedPoints = earnedPoints + question[i].pointsGiven;
+            break;  
         }
-        totalPoints += question[i].pointsGiven;
-        break;
+           
     }
+    
+    totalPoints += question[i].pointsGiven;
 
     //Final answer check
     if(i+1 === questionsLenght)
     {
-        console.log("enter");
         removeNodes(mainContainer);
         displayResult()
         break;
@@ -105,7 +126,7 @@ async function displayQuestion(question)
    }
 }
 
-
+// Displaying results
 function displayResult()
 {   
     const resultHeading = createNode("h1");
@@ -123,11 +144,14 @@ function displayResult()
     const headGrade= createNode("li");
     const gradeGrade = createNode("li");
 
+    const divContainer = createNode("div");
     const restartButton = createNode("button");
+    const homeButton = createNode("button");
 
     mainContainer.setAttribute("id", "mainContainerResult");
     scoreDivContainer.setAttribute("id", "score");
-
+    divContainer.setAttribute("id", "buttonContainer");
+    
     append(mainContainer, resultHeading);
     append(mainContainer, scoreDivContainer);
 
@@ -143,7 +167,10 @@ function displayResult()
     append(ulGrade, headGrade);
     append(ulGrade, gradeGrade);
 
-
+    append(mainContainer, divContainer);
+    append(divContainer, homeButton);
+    append(divContainer, restartButton);
+  
     resultHeading.innerHTML = "Your Results";
 
     headPoints.innerHTML = "Points";
@@ -155,11 +182,26 @@ function displayResult()
     headGrade.innerHTML = "Grade";
     gradeGrade.innerHTML = getGrade();
 
-    //To do fix score issue and finish the grading
+    homeButton.innerHTML = "Home";
+    restartButton.innerHTML = "Restart";
+
+    homeButton.addEventListener("click", function(event)
+    {   
+        totalPoints = 0;
+        earnedPoints = 0;
+        removeNodes(mainContainer);
+        displayHome();
+    })
+
+    restartButton.addEventListener("click", function(event)
+    {
+        totalPoints = 0;
+        earnedPoints = 0;
+        removeNodes(mainContainer);
+        getQuestion(url);
+    });
 
 }
-
-
 
 // Getting the data from data base
 async function getQuestion(url)
@@ -171,6 +213,7 @@ async function getQuestion(url)
     {
         if(response.ok)
         {
+            mainContainer.setAttribute("id", "mainContainerQuestion");
             displayQuestion(responseData);
         }
         else
@@ -217,9 +260,21 @@ function calculatePercentage(x,y)
 
 function getGrade()
 {
-   if(calculatePercentageScore() > calculatePercentage(50,100))
+   if(calculatePercentageScore() >= calculatePercentage(90,100))
+   {
+    return "Perfect";
+   }
+   else if(calculatePercentageScore() >= calculatePercentage(80,100))
+   {
+    return "Very Good";
+   }
+   else if(calculatePercentageScore() >= calculatePercentage(65,100))
    {
     return "Good";
+   }
+   else if(calculatePercentageScore() >= calculatePercentage(50,100))
+   {
+    return "Fine"
    }
    else
    {
