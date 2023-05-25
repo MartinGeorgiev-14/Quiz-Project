@@ -15,10 +15,10 @@ function startQuiz(){
 async function displayQuestion(question)
 {
     const questionsLenght = Object.keys(question).length;
-    
-    let i = 0;
+
    for (let i = 0; i < questionsLenght; i++) 
    {
+
     let numberQuestion = 0;
 
     //Creating and appending the heading of the question and continue button
@@ -40,7 +40,16 @@ async function displayQuestion(question)
 
     questionTitle.innerHTML = question[i].questionTitle;
     questionNum.innerHTML = i+1 + "/" + questionsLenght;
-    nextFnishButton.innerHTML = "Next";
+
+    //Check if the answer is last or next
+    if(i+1 === questionsLenght)
+    {
+        nextFnishButton.innerHTML = "Finish";
+    }
+    else
+    {
+        nextFnishButton.innerHTML = "Next";
+    }
 
     //Creating and appending the question inputs
     question[i].answers.forEach(element => {
@@ -64,10 +73,11 @@ async function displayQuestion(question)
     });
 
     await waitForClick(nextFnishButton);
+
+    //Suming the points of the question
     const radioButtons = document.querySelectorAll('input[name="question"]')
     let selectedAnswer;
 
-    //Suming the points of the question
     for(const radioButton of radioButtons)
     { 
         if(radioButton.checked)
@@ -81,17 +91,74 @@ async function displayQuestion(question)
         totalPoints += question[i].pointsGiven;
         break;
     }
-  
+
+    //Final answer check
+    if(i+1 === questionsLenght)
+    {
+        console.log("enter");
+        removeNodes(mainContainer);
+        displayResult()
+        break;
+    }
+
     removeNodes(mainContainer);
    }
 }
 
 
-function waitForClick(button) {
-    return new Promise((resolve) => {
-      button.addEventListener('click', resolve);
-    });
+function displayResult()
+{   
+    const resultHeading = createNode("h1");
+    const scoreDivContainer = createNode("div");
+
+    const ulPoints = createNode("ul");
+    const headPoints = createNode("li");
+    const pointsPoints = createNode("li");
+
+    const ulPercentage = createNode("ul");
+    const headPercentage= createNode("li");
+    const percentagePercentage = createNode("li");
+
+    const ulGrade = createNode("ul");
+    const headGrade= createNode("li");
+    const gradeGrade = createNode("li");
+
+    const restartButton = createNode("button");
+
+    mainContainer.setAttribute("id", "mainContainerResult");
+    scoreDivContainer.setAttribute("id", "score");
+
+    append(mainContainer, resultHeading);
+    append(mainContainer, scoreDivContainer);
+
+    append(scoreDivContainer, ulPoints);
+    append(ulPoints, headPoints);
+    append(ulPoints, pointsPoints);
+
+    append(scoreDivContainer, ulPercentage);
+    append(ulPercentage, headPercentage);
+    append(ulPercentage, percentagePercentage);
+
+    append(scoreDivContainer, ulGrade);
+    append(ulGrade, headGrade);
+    append(ulGrade, gradeGrade);
+
+
+    resultHeading.innerHTML = "Your Results";
+
+    headPoints.innerHTML = "Points";
+    pointsPoints.innerHTML = earnedPoints + " out of " + totalPoints;
+
+    headPercentage.innerHTML = "Percentage";
+    percentagePercentage.innerHTML = calculatePercentageScore() + " %";
+
+    headGrade.innerHTML = "Grade";
+    gradeGrade.innerHTML = getGrade();
+
+    //To do fix score issue and finish the grading
+
 }
+
 
 
 // Getting the data from data base
@@ -132,6 +199,34 @@ function removeNodes(element){
         element.removeChild(element.firstChild);
     }
 }
+
+function waitForClick(button) {
+    return new Promise((resolve) => {
+      button.addEventListener('click', resolve);
+    });
+}
+
+function calculatePercentageScore(){
+    return Math.round((earnedPoints/totalPoints) * 100);
+}
+
+function calculatePercentage(x,y)
+{
+    return Math.round((x/y) * 100);
+}
+
+function getGrade()
+{
+   if(calculatePercentageScore() > calculatePercentage(50,100))
+   {
+    return "Good";
+   }
+   else
+   {
+    return "Poor";
+   }
+}
+
 
 
 
