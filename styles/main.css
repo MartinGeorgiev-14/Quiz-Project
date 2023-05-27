@@ -141,9 +141,22 @@ main{
     margin-left: 0.3rem;
 }
 
+#bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+}
+
+#bottom p {
+    font-size: 1.5rem;
+}
+
+#bottom p span{
+    font-weight: bold;
+}
+
 #nextFinish{
-    position: relative;
-    left: 40%;
     background-color: aqua;
     width: 5rem;
     padding: 0.5rem;
@@ -152,6 +165,7 @@ main{
     border-radius: 10px;
     font-size: 1.1rem;
 }
+
 
 #nextFinish:hover{
     background-color: rgb(157, 253, 253);
@@ -203,6 +217,7 @@ main{
     justify-content: space-evenly;
     width: 100%;
 }
+
 
 #mainContainerResult div button{
     background-color: aqua;

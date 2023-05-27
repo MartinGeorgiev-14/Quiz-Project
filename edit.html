@@ -10,11 +10,133 @@
 <body>
     <header>
         <div class="heading">
-            <h2>Quiz Game</h2>
-            <a href="index.html">Back</a>
+            <h2 href>Quiz Game</h2>
+            <a href="index.html">Edit</a>
         </div>
     </header>
     
+    <main>
+        <form id="mainContainerCreate">
+            <h2>Quiz Editor</h2>
+
+            <label class="container">
+                <p>Number of answers</p>
+                <input type="number"/>
+            </label>
+
+            <label class="container">
+                <p>Question</p>
+                <input type="text"/>
+            </label>
+            
+            <label class="container">
+                <p>Answer 1</p>
+                <input type="text" name="answer"/>
+            </label>
+
+            <label class="container">
+                <p>Answer 2</p>
+                <input type="text" name="answer"/>
+            </label>
+
+            <label class="container">
+                <p>Answer 3</p>
+                <input type="text" name="answer"/>
+            </label>
+
+            <label class="container">
+                <p>Answer 4</p>
+                <input type="text" name="answer"/>
+            </label>
+
+            <div id="answerPointsOptions">
+                <label>
+                    <p>Correct answer</p>
+                    <select id="type">
+                        <option>Answer 1</option>
+                        <option>Answer 2</option>
+                        <option>Answer 3</option>
+                        <option>Answer 4</option>
+                    </select>
+                </label>
+
+                <label class="container">
+                    <p>Points</p>
+                    <input type="number"/>
+                </label>
+            </div>
+
+            <input id="saveButton" type="submit" value="Save"/>
+        </form>
+
+        <div id="mainContainerEdit">
+
+            <div id="top">
+                <input type="button" value="Sort by number">
+                <input type="button" value="Sort by date">
+                <input type="button" value="Sort by points">
+            </div>
+
+            <form id="formContainer">
+                <label class="container">
+                    <p>Number of answers</p>
+                    <input type="number"/>
+                </label>
+
+                <label class="container">
+                    <p>Question</p>
+                    <input type="text"/>
+                </label>
+                
+                <label class="container">
+                    <p>Answer 1</p>
+                    <input type="text" name="answer"/>
+                </label>
+    
+                <label class="container">
+                    <p>Answer 2</p>
+                    <input type="text" name="answer"/>
+                </label>
+    
+                <label class="container">
+                    <p>Answer 3</p>
+                    <input type="text" name="answer"/>
+                </label>
+    
+                <label class="container">
+                    <p>Answer 4</p>
+                    <input type="text" name="answer"/>
+                </label>
+    
+                <div id="answerPointsOptions">
+
+                    <label>
+                        <p>Correct answer</p>
+                        <select id="type">
+                            <option>Answer 1</option>
+                            <option>Answer 2</option>
+                            <option>Answer 3</option>
+                            <option>Answer 4</option>
+                        </select>
+                    </label>
+    
+                    <label class="container">
+                        <p>Points</p>
+                        <input type="number"/>
+                    </label>
+                </div>
+
+            </form>
+
+
+            <div id="bottom">
+                <input type="button" value="Sort by ">
+                <input type="button" value="Sort by date">
+            </div>
+
+        </div>
+    </main>
+
     <script src="scripts\main.js"></script>
 </body>
-</html>
+</html> 

@@ -42,8 +42,178 @@ html, body {
     transition: ease-in-out 0.1s;
 }
 
+main{
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+/*Start of question creator*/
+#mainContainerCreate{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: brown;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-radius: 1.5rem;
+    width: 90%;
+    height: 100%;
+    
+}
+
+#mainContainerCreate h2{
+    position: absolute;
+    font-size: 2rem;
+    top: 8.5rem;
+}
+
+#mainContainerCreate label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: aliceblue;
+}
+
+#mainContainerCreate label p{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#mainContainerCreate label input, #mainContainerCreate select{
+    font-size: 1.5rem;
+}
+#mainContainerCreate label input{
+    padding-left: 0.2rem;
+}
+
+#mainContainerCreate option{
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+#answerPointsOptions{
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#answerPointsOptions label {
+    width: 40%;
+}
+
+#saveButton{
+    background-color: aqua;
+    width: 15%;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/*End of question creator*/
+
+/*Start of question editor*/
+
+#mainContainerEdit{
+    margin-top: 5rem;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#top{
+    background-color: brown;
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    width: 100%;
+}
+
+#top input{
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
 
 
+#formContainer{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+#mainContainerEdit h2{
+    position: absolute;
+    font-size: 2rem;
+    top: 8.5rem;
+}
 
+#mainContainerEdit label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: aliceblue;
+}
+
+#mainContainerEdit label p{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#mainContainerEdit label input, #mainContainerEdit select{
+    font-size: 1.5rem;
+}
+#mainContainerEdit label input{
+    padding-left: 0.2rem;
+}
+
+#mainContainerEdit option{
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+#answerPointsOptions{
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#answerPointsOptions label {
+    width: 40%;
+}
+
+#bottom{
+    background-color: brown;
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#bottom input{
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+/*End of question editor*/
 

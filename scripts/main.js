@@ -41,34 +41,34 @@ async function displayQuestion(question)
     let numberQuestion = 0;
 
     //Creating and appending the heading of the question and continue button
-    const topHead = createNode("div");
+    const questionIndicator = createNode("div");
     const questionTitle = createNode("h2");
     const questionNum = createNode("p");
     const questionForm = createNode("form");
-    const nextFnishButton = createNode("button");
-    
-    topHead.setAttribute("id" , "top");
+    const questionBottom = createNode("div");
+    const questionPoints = createNode("p");
+    const nextFnishButton = createNode("input");
+
+    questionIndicator.setAttribute("id" , "top");
+    questionBottom.setAttribute("id", "bottom");
     questionForm.setAttribute("id", "questionForm");
     nextFnishButton.setAttribute("id", "nextFinish");
+    nextFnishButton.setAttribute("type", "submit");
 
-    append(mainContainer, topHead);
-    append(topHead, questionTitle);
-    append(topHead, questionNum)
+    append(mainContainer, questionIndicator);
+    append(questionIndicator, questionTitle);
+    append(questionIndicator, questionNum);
     append(mainContainer, questionForm);
-    append(mainContainer, nextFnishButton);
+    append(mainContainer, questionBottom);
+    append(questionBottom, questionPoints);
+    append(questionBottom, nextFnishButton);
 
     questionTitle.innerHTML = question[i].questionTitle;
-    questionNum.innerHTML = i+1 + "/" + questionsLenght;
+    questionNum.innerHTML = i+1 + "<span>/"+ questionsLenght + "</span>";
+    questionPoints.innerHTML = "<span>Points: </span>" + question[i].pointsGiven;
 
     //Check if the answer is last or next
-    if(i+1 === questionsLenght)
-    {
-        nextFnishButton.innerHTML = "Finish";
-    }
-    else
-    {
-        nextFnishButton.innerHTML = "Next";
-    }
+    nextOrFinish(nextFnishButton ,i, questionsLenght);
 
     //Creating and appending the question inputs
     question[i].answers.forEach(element => {
@@ -91,6 +91,7 @@ async function displayQuestion(question)
         numberQuestion++;
     });
 
+    
     await waitForClick(nextFnishButton);
 
     //Suming the points of the question
@@ -105,7 +106,6 @@ async function displayQuestion(question)
      
         if(selectedAnswer == question[i].correctAnswer)
         {
-            
             earnedPoints = earnedPoints + question[i].pointsGiven;
             break;  
         }
@@ -222,7 +222,8 @@ async function getQuestion(url)
         }
     } 
     catch (error) 
-    {
+    {   
+        alert(error);
         console.log(error)
     }
 }
@@ -280,6 +281,18 @@ function getGrade()
    {
     return "Poor";
    }
+}
+
+function nextOrFinish(button, current, lenght){
+
+    if(current+1 === lenght)
+    {
+        button.setAttribute("value", "Finish");
+    }
+    else
+    {
+        button.setAttribute("value", "Next");
+    }
 }
 
 

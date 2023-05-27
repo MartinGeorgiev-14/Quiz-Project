@@ -1,0 +1,33 @@
+<div id="mainContainerQuestion">  
+            <div id="top">
+                <h2>Question Heading</h2>
+                <p>1<span>/10</span></p>
+            </div>
+            <form id="questionForm">
+    
+              <label class="container">
+                <input type="radio" name="radio"/>
+                <p>One</p>
+              </label>
+    
+              <label class="container">
+                <input type="radio" name="radio"/>
+                <p>One</p>
+              </label>
+    
+              <label class="container">
+                <input type="radio" name="radio"/>
+                <p>One</p>
+              </label>
+    
+              <label class="container">
+                <input type="radio" name="radio"/>
+                <p>One</p>
+              </label>
+    
+            </form>
+            <div id="bottom">
+                <p><span>Points: </span>10</p>
+                <button id="nextFinish">Next</button>
+            </div>
+        </div>
