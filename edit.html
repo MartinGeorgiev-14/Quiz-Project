@@ -21,48 +21,24 @@
 
             <label class="container">
                 <p>Number of answers</p>
-                <input type="number"/>
+                <input type="number" id="numberAns"/>
             </label>
 
             <label class="container">
                 <p>Question</p>
-                <input type="text"/>
+                <input type="text" id="question"/>
             </label>
             
-            <label class="container">
-                <p>Answer 1</p>
-                <input type="text" name="answer"/>
-            </label>
-
-            <label class="container">
-                <p>Answer 2</p>
-                <input type="text" name="answer"/>
-            </label>
-
-            <label class="container">
-                <p>Answer 3</p>
-                <input type="text" name="answer"/>
-            </label>
-
-            <label class="container">
-                <p>Answer 4</p>
-                <input type="text" name="answer"/>
-            </label>
-
-            <div id="answerPointsOptions">
+            <div id="correctAnswerOption">
                 <label>
                     <p>Correct answer</p>
-                    <select id="type">
-                        <option>Answer 1</option>
-                        <option>Answer 2</option>
-                        <option>Answer 3</option>
-                        <option>Answer 4</option>
+                    <select id="correctAns">
                     </select>
                 </label>
 
                 <label class="container">
                     <p>Points</p>
-                    <input type="number"/>
+                    <input type="number" id="questionPoints"/>
                 </label>
             </div>
 
@@ -77,66 +53,14 @@
                 <input type="button" value="Sort by points">
             </div>
 
-            <form id="formContainer">
-                <label class="container">
-                    <p>Number of answers</p>
-                    <input type="number"/>
-                </label>
-
-                <label class="container">
-                    <p>Question</p>
-                    <input type="text"/>
-                </label>
-                
-                <label class="container">
-                    <p>Answer 1</p>
-                    <input type="text" name="answer"/>
-                </label>
-    
-                <label class="container">
-                    <p>Answer 2</p>
-                    <input type="text" name="answer"/>
-                </label>
-    
-                <label class="container">
-                    <p>Answer 3</p>
-                    <input type="text" name="answer"/>
-                </label>
-    
-                <label class="container">
-                    <p>Answer 4</p>
-                    <input type="text" name="answer"/>
-                </label>
-    
-                <div id="answerPointsOptions">
-
-                    <label>
-                        <p>Correct answer</p>
-                        <select id="type">
-                            <option>Answer 1</option>
-                            <option>Answer 2</option>
-                            <option>Answer 3</option>
-                            <option>Answer 4</option>
-                        </select>
-                    </label>
-    
-                    <label class="container">
-                        <p>Points</p>
-                        <input type="number"/>
-                    </label>
-                </div>
-
-            </form>
+           
 
 
-            <div id="bottom">
-                <input type="button" value="Sort by ">
-                <input type="button" value="Sort by date">
-            </div>
+        
 
         </div>
     </main>
 
-    <script src="scripts\main.js"></script>
+    <script src="scripts\edit.js"></script>
 </body>
 </html> 
