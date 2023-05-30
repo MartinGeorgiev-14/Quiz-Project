@@ -1,12 +1,16 @@
-const url = "http://localhost:3000/questions";
+const url = "http://localhost:3000/questions/";
 const startButton = document.getElementById("start");
 const mainContainer = document.getElementById("mainContainerMessage");
 let earnedPoints = 0;
 let totalPoints = 0;
+let numQuestion = 0;
+let questionsLenght;
 
 // Removing the start menu
-function startQuiz(){
+async function startQuiz(){
         removeNodes(mainContainer);
+        //Getting how many questions are in the database
+        questionsLenght = (await getQuestionLenght("http://localhost:3000/questions")).length;
         getQuestion(url);
 }
 
@@ -33,12 +37,7 @@ function displayHome()
 // Displaying question
 async function displayQuestion(question)
 {
-    const questionsLenght = Object.keys(question).length;
-
-   for (let i = 0; i < questionsLenght; i++) 
-   {
-
-    let numberQuestion = 0;
+    removeNodes(mainContainer);
 
     //Creating and appending the heading of the question and continue button
     const questionIndicator = createNode("div");
@@ -63,24 +62,31 @@ async function displayQuestion(question)
     append(questionBottom, questionPoints);
     append(questionBottom, nextFnishButton);
 
-    questionTitle.innerHTML = question[i].questionTitle;
-    questionNum.innerHTML = i+1 + "<span>/"+ questionsLenght + "</span>";
-    questionPoints.innerHTML = "<span>Points: </span>" + question[i].pointsGiven;
-
     //Check if the answer is last or next
-    nextOrFinish(nextFnishButton ,i, questionsLenght);
+    if(numQuestion === questionsLenght)
+    {
+        nextFnishButton.value = "Finish";
+    }
+    else
+    {
+        nextFnishButton.value = "Next";
+    }
+
+    questionTitle.innerHTML = question.questionTitle;
+    questionNum.innerHTML = numQuestion + "<span>/"+ questionsLenght + "</span>";
+    questionPoints.innerHTML = "<span>Points: </span>" + question.pointsGiven;
 
     //Creating and appending the question inputs
-    question[i].answers.forEach(element => {
+    question.answers.forEach((element, index) => {
         
         const questionLabel = createNode("label");
         const radioInput = createNode("input");
         const questionText = createNode("p");
 
         radioInput.setAttribute("type", "radio");
-        radioInput.setAttribute("id", "answer" + numberQuestion);
+        radioInput.setAttribute("id", "answer" + index);
         radioInput.setAttribute("name", "question");
-        radioInput.setAttribute("value", numberQuestion);
+        radioInput.setAttribute("value", index);
         questionLabel.setAttribute("class", "container");
 
         append(questionForm, questionLabel);
@@ -88,42 +94,41 @@ async function displayQuestion(question)
         append(questionLabel, questionText);
 
         questionText.innerHTML = element;
-        numberQuestion++;
+       
     });
 
-    
-    await waitForClick(nextFnishButton);
-
     //Suming the points of the question
-    const radioButtons = document.querySelectorAll('input[name="question"]')
-    let selectedAnswer;
-   
-    for(const radioButton of radioButtons)
-    { 
-        if(radioButton.checked){
-        selectedAnswer = radioButton.value;
-        }
-     
-        if(selectedAnswer == question[i].correctAnswer)
-        {
-            earnedPoints = earnedPoints + question[i].pointsGiven;
-            break;  
-        }
+    const radioButtons = document.querySelectorAll('input[name="question"]');
+
+    nextFnishButton.addEventListener("click", function(event)
+    {   
+        //Checking if there is no given answer
+        const selectedAnswer = Array.from(radioButtons).find(b => b.checked)?.value;   
+        if(selectedAnswer !== undefined)
+        {   //Checking if the selected answer is correct
+            if(+selectedAnswer === question.correctAnswer)
+            {   
+                earnedPoints = earnedPoints + question.pointsGiven;
+            }
+
+            totalPoints += question.pointsGiven;
            
-    }
-    
-    totalPoints += question[i].pointsGiven;
+            if(numQuestion === questionsLenght)
+            {   
+                removeNodes(mainContainer);
+                displayResult();
+                return;
+            }
+            getQuestion(url);
+        } 
 
-    //Final answer check
-    if(i+1 === questionsLenght)
-    {
-        removeNodes(mainContainer);
-        displayResult()
-        break;
-    }
+        else
+        {
+            alert("Select at least one answer");
+        }
+        
+    })
 
-    removeNodes(mainContainer);
-   }
 }
 
 // Displaying results
@@ -187,6 +192,7 @@ function displayResult()
 
     homeButton.addEventListener("click", function(event)
     {   
+        numQuestion = 0;
         totalPoints = 0;
         earnedPoints = 0;
         removeNodes(mainContainer);
@@ -195,6 +201,7 @@ function displayResult()
 
     restartButton.addEventListener("click", function(event)
     {
+        numQuestion = 0;
         totalPoints = 0;
         earnedPoints = 0;
         removeNodes(mainContainer);
@@ -206,6 +213,34 @@ function displayResult()
 // Getting the data from data base
 async function getQuestion(url)
 {
+    
+    const response = await fetch(url + numQuestion);
+    const responseData = await response.json();
+
+    try 
+    {
+        if(response.ok)
+        {
+            numQuestion++;
+            mainContainer.setAttribute("id", "mainContainerQuestion");
+            displayQuestion(responseData);
+        }
+        else
+        {
+            throw new Error(response.statusText);    
+        }
+    } 
+    catch (error) 
+    {   
+        alert(error);
+        console.log(error)
+    }
+}
+
+// Getting the data lenght from data base
+async function getQuestionLenght(url)
+{
+    
     const response = await fetch(url);
     const responseData = await response.json();
 
@@ -213,8 +248,7 @@ async function getQuestion(url)
     {
         if(response.ok)
         {
-            mainContainer.setAttribute("id", "mainContainerQuestion");
-            displayQuestion(responseData);
+            return responseData;
         }
         else
         {
@@ -281,18 +315,6 @@ function getGrade()
    {
     return "Poor";
    }
-}
-
-function nextOrFinish(button, current, lenght){
-
-    if(current+1 === lenght)
-    {
-        button.setAttribute("value", "Finish");
-    }
-    else
-    {
-        button.setAttribute("value", "Next");
-    }
 }
 
 

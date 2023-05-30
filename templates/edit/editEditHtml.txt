@@ -11,7 +11,7 @@
     <header>
         <div class="heading">
             <h2 href>Quiz Game</h2>
-            <a href="index.html">Edit</a>
+            <a href="index.html">Home</a>
         </div>
     </header>
     
@@ -29,63 +29,87 @@
                 <input type="text" id="question"/>
             </label>
             
-            <div id="answersContainer">
-
-                <label class="container">
-                    <p>Answer 1</p>
-                    <input type="text" name="answer" id="answer1"/>
-                </label>
-
-                <label class="container">
-                    <p>Answer 2</p>
-                    <input type="text" name="answer" id="answer2"/>
-                </label>
-
-                <label class="container">
-                    <p>Answer 3</p>
-                    <input type="text" name="answer" id="answer3"/>
-                </label>
-
-                <label class="container">
-                    <p>Answer 4</p>
-                    <input type="text" name="answer" id="answer4"/>
-                </label>
-
-            </div>
-
-            <div id="answerPointsOptions">
+            <div id="correctAnswerOption">
                 <label>
                     <p>Correct answer</p>
-                    <select id="type" itemid="correctAns">
-                        <option>Answer 1</option>
-                        <option>Answer 2</option>
-                        <option>Answer 3</option>
-                        <option>Answer 4</option>
+                    <select id="correctAns">
                     </select>
                 </label>
 
                 <label class="container">
                     <p>Points</p>
-                    <input type="number"/>
+                    <input type="number" id="questionPoints"/>
                 </label>
             </div>
 
-            <input id="saveButton" type="submit" value="Save" onclick="createQuestion()"/>
+            <input id="saveButton" type="submit" value="Save"/>
         </form>
 
         <div id="mainContainerEdit">
-
             <div id="top">
-                <input type="button" value="Sort by number">
-                <input type="button" value="Sort by date">
+                <input type="button" value="Sort by id">
+                <input type="button" value="Sort by creation date">
+                <input type="button" value="Sort by edit date">
                 <input type="button" value="Sort by points">
             </div>
 
-           
+            <div class="itemContainer" id="itemContainer0">
+                <label class="listContainer">
+                    <p>Number of answers</p>
+                    <input type="number" id="numberAns" disabled/>
+                </label>
 
+                <label class="listContainer">
+                    <p>Question</p>
+                    <input type="text" id="question"/>
+                </label>
+                
+                <div id="answersContainer">
+                    <label class="listContainer">
+                        <p>Answer 1</p>
+                        <input type="text" name="answer" id="answer1" value="disabled" disabled/>
+                    </label>
 
-        
+                    <label class="listContainer">
+                        <p>Answer 2</p>
+                        <input type="text" name="answer" id="answer2" />
+                    </label>
 
+                    <label class="listContainer">
+                        <p>Answer 3</p>
+                        <input type="text" name="answer" id="answer3"/>
+                    </label>
+
+                    <label class="listContainer">
+                        <p>Answer 4</p>
+                        <input type="text" name="answer" id="answer4"/>
+                    </label>
+                </div>
+                
+                <div id="correctAnswerOption">
+                    <label>
+                        <p>Correct answer</p>
+                        <select id="correctAns">
+                        </select>
+                    </label>
+
+                    <label class="listContainer">
+                        <p>Points</p>
+                        <input type="number" id="questionPoints"/>
+                    </label>
+                </div>
+                
+                <div id="info">
+                    <p>Made at: <span>14.04.2002 19:02:39</span></p>
+                    <p>Edited at: <span>15.05.2003 17:32:11</span></p>
+                    <p>Id: <span>2</span></p>
+                </div>
+                <div id="bottom">
+                    <input type="button" value="Edit">
+                    <input type="button" value="Save">
+                </div>
+
+            </div>
         </div>
     </main>
 
