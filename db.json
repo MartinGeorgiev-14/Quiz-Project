@@ -64,6 +64,32 @@
       "createdOn": "2023-05-30T19:04:09.531Z",
       "editedAt": "",
       "id": 4
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "312312",
+      "answers": [
+        "3123123",
+        "1231231"
+      ],
+      "correctAnswer": 1,
+      "pointsGiven": 14,
+      "createdOn": "2023-05-31T11:27:44.176Z",
+      "editedAt": "",
+      "id": 5
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "321123",
+      "answers": [
+        "123123124",
+        "1241241"
+      ],
+      "correctAnswer": 0,
+      "pointsGiven": 12,
+      "createdOn": "2023-05-31T11:35:23.199Z",
+      "editedAt": "",
+      "id": 6
     }
   ]
 }

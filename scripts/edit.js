@@ -102,6 +102,60 @@ saveButton.addEventListener("click", function(event)
     postQuestion(url);
 })
 
+getQuestions();
+//Getting all questions
+async function getQuestions(arl = "http://localhost:3000/questions")
+{
+    
+    const response = await fetch(arl);
+    const responseData = await response.json();
+
+    try 
+    {
+        if(response.ok)
+        {
+            return getQuestions(responseData);
+        }
+        else
+        {
+            throw new Error(response.statusText);    
+        }
+    } 
+    catch (error) 
+    {   
+        alert(error);
+        console.log(error)
+    }
+}
+
+
+function displayQuestions(question)
+{
+    question.forEach(element => {
+        
+        const itemContainerDiv = createNode("div");
+
+        const numOfAnsLabel = createNode("label");
+        const numOfAnsParagraph = createNode("p");
+        const numOfAnsInput = createNode("input");
+
+        const questionTitleLabel = createNode("label");
+        const questionTitleParagraph = createNode("p");
+        const questionTitleInput = createNode("input");
+
+        console.log(element.answers.length);
+
+        for(const i = 0; i < element.answers.length; i++)
+        {
+
+        }
+
+    });
+
+   
+}
+
+
 //Posting a question in the database
 async function postQuestion(url)
 {
