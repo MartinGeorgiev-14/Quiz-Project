@@ -206,7 +206,7 @@ main{
     justify-content: center;
 }
 
-#EditAnswersContainer
+.EditAnswersContainer
 {
     width: 90%;
     display: flex;

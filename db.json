@@ -43,6 +43,102 @@
       "createdOn": "01/06/2023 23:12:37",
       "editedOn": "-",
       "id": 3
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "32",
+      "answers": [
+        "234",
+        "345",
+        "345"
+      ],
+      "correctAnswer": 0,
+      "pointsGiven": 3,
+      "createdOn": "01/06/2023 23:17:07",
+      "editedOn": "-",
+      "id": 4
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "3",
+      "answers": [
+        "3",
+        "3",
+        "3"
+      ],
+      "correctAnswer": 2,
+      "pointsGiven": 3,
+      "createdOn": "01/06/2023 23:19:09",
+      "editedOn": "-",
+      "id": 5
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "2",
+      "answers": [
+        "2",
+        "2"
+      ],
+      "correctAnswer": 1,
+      "pointsGiven": 2,
+      "createdOn": "01/06/2023 23:20:28",
+      "editedOn": "-",
+      "id": 6
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "2",
+      "answers": [
+        "2",
+        "2"
+      ],
+      "correctAnswer": 1,
+      "pointsGiven": 2,
+      "createdOn": "01/06/2023 23:20:44",
+      "editedOn": "-",
+      "id": 7
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "4",
+      "answers": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "correctAnswer": 3,
+      "pointsGiven": 4,
+      "createdOn": "01/06/2023 23:22:26",
+      "editedOn": "-",
+      "id": 8
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "2",
+      "answers": [
+        "2",
+        "2"
+      ],
+      "correctAnswer": 1,
+      "pointsGiven": 3,
+      "createdOn": "01/06/2023 23:24:11",
+      "editedOn": "-",
+      "id": 9
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "Dali obicham banichki",
+      "answers": [
+        "da",
+        "ne",
+        "neznam"
+      ],
+      "correctAnswer": 0,
+      "pointsGiven": 100,
+      "createdOn": "01/06/2023 23:24:37",
+      "editedOn": "-",
+      "id": 10
     }
   ]
 }

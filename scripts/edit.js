@@ -98,12 +98,12 @@ saveButton.addEventListener("click", function(event)
     postQuestion(url);
 })
 
-getQuestions();
+getQuestions(url);
 //Getting all questions
-async function getQuestions(arl = "http://localhost:3000/questions")
+async function getQuestions(url)
 {
     
-    const response = await fetch(arl);
+    const response = await fetch(url);
     const responseData = await response.json();
 
     try 
@@ -127,7 +127,7 @@ async function getQuestions(arl = "http://localhost:3000/questions")
 // Displaying all questions in the database
 function displayQuestions(question)
 {
-
+    removeNodes(mainContainerEdit);
     let questionIndex = 0;
     
     question.forEach(element => {
@@ -159,19 +159,21 @@ function displayQuestions(question)
         const idInfo = createNode("p");
 
         const editSaveContainer = createNode("div");
-        const editButton = createNode("input");
-        const saveButton = createNode("input");
+        const editButton = createNode("button");
+        const saveButton = createNode("button");
 
-        itemContainer.setAttribute("id", "EditAnswersContainer")
+        itemContainer.setAttribute("class", "EditAnswersContainer")
 
         numOfAnsLabel.setAttribute("class", "listContainer");
         numOfAnsLabel.setAttribute("id", "numberOfAnswers");
         numOfAnsInput.setAttribute("type", "number");
+        numOfAnsInput.setAttribute("name", "top" + element.id);
         numOfAnsInput.setAttribute("disabled", "");
 
         questionTitleLabel.setAttribute("class", "listContainer");
         questionTitleLabel.setAttribute("id", "questionTitle");
         questionTitleInput.setAttribute("type", "text");
+        questionTitleInput.setAttribute("name", "top" + element.id);
         questionTitleInput.setAttribute("disabled", "");
         
 
@@ -186,11 +188,9 @@ function displayQuestions(question)
         infoContainer.setAttribute("id", "info");
 
         editSaveContainer.setAttribute("id", "bottom");
-        editButton.setAttribute("type", "button");
-        editButton.setAttribute("value", "Edit");
-        saveButton.setAttribute("type", "button");
-        saveButton.setAttribute("value", "Save");
         saveButton.setAttribute("disabled", "");
+        editButton.setAttribute("name", "bottom" + element.id);
+        saveButton.setAttribute("name", "" + element.id);
 
         append(mainContainerEdit,itemContainer);
 
@@ -209,12 +209,10 @@ function displayQuestions(question)
             const answerLabel = createNode("label");
             const answerParagraph = createNode("p");
             const answerInput = createNode("input");
-
             
             answerLabel.setAttribute("class", "listContainer");
             answerInput.setAttribute("type", "text");
-            answerInput.setAttribute("name", "itemAnswer");
-            answerInput.setAttribute("id", "itemAnswer" + i);
+            answerInput.setAttribute("name", "itemAnswer" + element.id);
             answerInput.setAttribute("disabled", "");
             
             append(answerLabel, answerParagraph);
@@ -271,15 +269,50 @@ function displayQuestions(question)
         pointsParagraph.innerHTML = "Points";
         pointsInput.setAttribute("value", element.pointsGiven);
 
-      
         createdOnInfo.innerHTML = "Created on: " + element.createdOn;
         editedAtInfo.innerHTML = "Edited on: " + element.editedOn;
         idInfo.innerHTML = "Id: " + element.id;
+
+        editButton.innerHTML = "Edit";
+        saveButton.innerHTML = "Save";
         
+        editButton.addEventListener("click", function(event)
+        {
+            saveButton.removeAttribute("disabled");
+            editButton.setAttribute("disabled", "");
+            
+            let disable = itemContainer.querySelectorAll("input");
+            
+            correctAnsnwerSelector.removeAttribute("disabled");
+
+            disable.forEach(element => {
+                element.removeAttribute("disabled");
+            });
+                
+            for(let i = 0; i < numOfAnsInput.value; i++)
+            {
+                console.log(i);
+            }
+           
+            
+        })
+
+        saveButton.addEventListener("click", function(event)
+        {
+            editButton.removeAttribute("disabled");
+            saveButton.setAttribute("disabled", "");
+
+            let enable = itemContainer.querySelectorAll("input");
+            
+            correctAnsnwerSelector.setAttribute("disabled", "");
+
+            enable.forEach(element => {
+                element.setAttribute("disabled", "");
+            });
+        })
 
     });
 
-   
 }
 
 
@@ -322,6 +355,7 @@ async function postQuestion(url)
             mainContainerCreate.reset();
             removeNodes(answersContainer);
             removeNodes(correctAnsnwerOption);
+            getQuestions(url);
         }
         else
         {
@@ -368,3 +402,9 @@ function removeNodes(element){
     }
 }
 
+function removeAttributeDisabled(element){
+    while(element.firstChild)
+    {
+        element.removeAttribute("disabled");
+    }
+}
