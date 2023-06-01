@@ -2,94 +2,47 @@
   "questions": [
     {
       "questionType": "oneAnswer",
-      "questionTitle": "First Question 1",
+      "questionTitle": "12312",
       "answers": [
-        "ans1",
-        "ans2",
-        "ans3",
-        "ans4"
-      ],
-      "correctAnswer": 0,
-      "pointsGiven": 5,
-      "id": 0
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "Second Question 2",
-      "answers": [
-        "ans1",
-        "ans2",
-        "ans3",
-        "ans4"
+        "3123345",
+        "dfgsdfg",
+        "3456"
       ],
       "correctAnswer": 1,
-      "pointsGiven": 5,
+      "pointsGiven": 4,
+      "createdOn": "01/06/2023 23:11:41",
+      "editedOn": "-",
       "id": 1
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "Third Question 3",
+      "questionTitle": "dfgsdfg",
       "answers": [
-        "ans1",
-        "ans2",
-        "ans3",
-        "ans4"
+        "sdfg",
+        "34534",
+        "dfsgsdfg",
+        "345q234sdfgh",
+        "sd"
       ],
       "correctAnswer": 2,
-      "pointsGiven": 2,
+      "pointsGiven": 5,
+      "createdOn": "01/06/2023 23:11:51",
+      "editedOn": "-",
       "id": 2
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "Thae qeustion",
+      "questionTitle": "33",
       "answers": [
-        "asdhahahha",
-        "adhhasdhasdahsqwe",
-        "asdfbspodfib"
+        "sdfg",
+        "dfg",
+        "dsfg"
       ],
-      "correctAnswer": 0,
-      "pointsGiven": 5,
-      "createdOn": "2023-05-30T18:24:37.853Z",
+      "correctAnswer": 1,
+      "pointsGiven": 33,
+      "createdOn": "01/06/2023 23:12:37",
+      "editedOn": "-",
       "id": 3
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "Copium",
-      "answers": [
-        "Cope harder",
-        "Cope the hardest"
-      ],
-      "correctAnswer": 1,
-      "pointsGiven": 10,
-      "createdOn": "2023-05-30T19:04:09.531Z",
-      "editedAt": "",
-      "id": 4
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "312312",
-      "answers": [
-        "3123123",
-        "1231231"
-      ],
-      "correctAnswer": 1,
-      "pointsGiven": 14,
-      "createdOn": "2023-05-31T11:27:44.176Z",
-      "editedAt": "",
-      "id": 5
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "321123",
-      "answers": [
-        "123123124",
-        "1241241"
-      ],
-      "correctAnswer": 0,
-      "pointsGiven": 12,
-      "createdOn": "2023-05-31T11:35:23.199Z",
-      "editedAt": "",
-      "id": 6
     }
   ]
 }

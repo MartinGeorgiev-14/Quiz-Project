@@ -96,13 +96,13 @@ main{
     text-align: center;
 }
 
-#correctAnswerOption{
+#correctAnswerPointsOption{
     width: 90%;
     display: flex;
     justify-content: space-evenly;
 }
 
-#correctAnswerOption label {
+#correctAnswerPointsOption label {
     width: 40%;
 }
 
@@ -206,13 +206,22 @@ main{
     justify-content: center;
 }
 
-#correctAnswerOption{
+#EditAnswersContainer
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#correctAnswerPointsOption{
     width: 90%;
     display: flex;
     justify-content: space-evenly;
 }
 
-#correctAnswerOption label {
+#correctAnswerPointsOption label {
     width: 40%;
 }
 

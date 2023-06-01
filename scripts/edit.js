@@ -1,6 +1,8 @@
 const url = "http://localhost:3000/questions";
 let answerQuestionGlobal = 0;
 const mainContainerCreate = document.getElementById("mainContainerCreate");
+const mainContainerEdit = document.getElementById("mainContainerEdit");
+const answersContainer = document.getElementById("answersContainer");
 const numberAnswers = document.getElementById("numberAns");
 const question = document.getElementById("question");
 const correctAnswerOptionDiv = document.getElementById("correctAnswerOption");
@@ -9,16 +11,10 @@ const questionPoints = document.getElementById("questionPoints");
 const saveButton = document.getElementById("saveButton");
 
 
-const answerContainer = createNode("div");
-
-answerContainer.setAttribute("id", "answersContainer");
-
-mainContainerCreate.insertBefore(answerContainer, correctAnswerOptionDiv);
-
 // Creating Answers
 numberAnswers.addEventListener("input", function(event)
 {   
-    removeNodes(answerContainer);
+    removeNodes(answersContainer);
     removeNodes(correctAnsnwerOption);
     let answerNum = 1;
 
@@ -39,7 +35,7 @@ numberAnswers.addEventListener("input", function(event)
         answerTitle.innerHTML = "Answer " + answerNum;
         correctAsnwer.innerHTML = "Answer " + answerNum;
 
-        append(answerContainer, containerLabel);    
+        append(answersContainer, containerLabel);    
         append(containerLabel, answerTitle);
         append(containerLabel, answerInput);
         append(correctAnsnwerOption, correctAsnwer);
@@ -114,7 +110,7 @@ async function getQuestions(arl = "http://localhost:3000/questions")
     {
         if(response.ok)
         {
-            return getQuestions(responseData);
+            return displayQuestions(responseData);
         }
         else
         {
@@ -128,13 +124,16 @@ async function getQuestions(arl = "http://localhost:3000/questions")
     }
 }
 
-
+// Displaying all questions in the database
 function displayQuestions(question)
 {
-    question.forEach(element => {
-        
-        const itemContainerDiv = createNode("div");
 
+    let questionIndex = 0;
+    
+    question.forEach(element => {
+        let editAnswerCounter = 1;
+
+    
         const numOfAnsLabel = createNode("label");
         const numOfAnsParagraph = createNode("p");
         const numOfAnsInput = createNode("input");
@@ -143,12 +142,140 @@ function displayQuestions(question)
         const questionTitleParagraph = createNode("p");
         const questionTitleInput = createNode("input");
 
-        console.log(element.answers.length);
+        const itemContainer = createNode("div");
 
-        for(const i = 0; i < element.answers.length; i++)
+        const answerOptionPointsContainer = createNode("div");
+        const correctAnsnwerLabel = createNode("label");
+        const correctAnsnwerParagraph = createNode("p");
+        const correctAnsnwerSelector = createNode("select");
+
+        const pointsLabel = createNode("label");
+        const pointsParagraph = createNode("p");
+        const pointsInput = createNode("input");
+
+        const infoContainer = createNode("div");
+        const createdOnInfo = createNode("p");
+        const editedAtInfo = createNode("p");
+        const idInfo = createNode("p");
+
+        const editSaveContainer = createNode("div");
+        const editButton = createNode("input");
+        const saveButton = createNode("input");
+
+        itemContainer.setAttribute("id", "EditAnswersContainer")
+
+        numOfAnsLabel.setAttribute("class", "listContainer");
+        numOfAnsLabel.setAttribute("id", "numberOfAnswers");
+        numOfAnsInput.setAttribute("type", "number");
+        numOfAnsInput.setAttribute("disabled", "");
+
+        questionTitleLabel.setAttribute("class", "listContainer");
+        questionTitleLabel.setAttribute("id", "questionTitle");
+        questionTitleInput.setAttribute("type", "text");
+        questionTitleInput.setAttribute("disabled", "");
+        
+
+        answerOptionPointsContainer.setAttribute("id", "correctAnswerPointsOption");
+        correctAnsnwerLabel.setAttribute("class", "listContainer");
+        correctAnsnwerSelector.setAttribute("disabled", "");
+
+        pointsLabel.setAttribute("class", "listContainer");
+        pointsInput.setAttribute("type", "number");
+        pointsInput.setAttribute("disabled", "");
+
+        infoContainer.setAttribute("id", "info");
+
+        editSaveContainer.setAttribute("id", "bottom");
+        editButton.setAttribute("type", "button");
+        editButton.setAttribute("value", "Edit");
+        saveButton.setAttribute("type", "button");
+        saveButton.setAttribute("value", "Save");
+        saveButton.setAttribute("disabled", "");
+
+        append(mainContainerEdit,itemContainer);
+
+        append(itemContainer, numOfAnsLabel);
+        append(numOfAnsLabel, numOfAnsParagraph);
+        append(numOfAnsLabel, numOfAnsInput);
+
+        append(itemContainer, questionTitleLabel);
+        append(questionTitleLabel, questionTitleParagraph);
+        append(questionTitleLabel, questionTitleInput);
+
+       
+        for(let i = 0; i < element.answers.length; i++)
         {
+           
+            const answerLabel = createNode("label");
+            const answerParagraph = createNode("p");
+            const answerInput = createNode("input");
 
+            
+            answerLabel.setAttribute("class", "listContainer");
+            answerInput.setAttribute("type", "text");
+            answerInput.setAttribute("name", "itemAnswer");
+            answerInput.setAttribute("id", "itemAnswer" + i);
+            answerInput.setAttribute("disabled", "");
+            
+            append(answerLabel, answerParagraph);
+            append(answerLabel, answerInput);
+            append(itemContainer, answerLabel);
+
+            answerParagraph.innerHTML = "Answer " + editAnswerCounter; 
+            answerInput.setAttribute("value", element.answers[i]);
+
+            editAnswerCounter++;
         }
+
+        editAnswerCounter = 1;
+
+        append(itemContainer, answerOptionPointsContainer);
+        append(answerOptionPointsContainer, correctAnsnwerLabel);
+        append(correctAnsnwerLabel, correctAnsnwerParagraph);
+        append(correctAnsnwerLabel, correctAnsnwerSelector);
+
+        append(answerOptionPointsContainer, pointsLabel);
+        append(pointsLabel, pointsParagraph);
+        append(pointsLabel, pointsInput);
+
+        for(let i = 0; i < element.answers.length; i++)
+        {
+            let num = element.correctAnswer + 1;
+            const answerOption = createNode("option");
+
+            answerOption.setAttribute("value", element.correctAnswer);
+
+            append(correctAnsnwerSelector, answerOption);
+            
+            answerOption.innerHTML = "Answer " + num;
+            
+        }
+
+        append(itemContainer, infoContainer);
+        append(infoContainer, createdOnInfo);
+        append(infoContainer, editedAtInfo);
+        append(infoContainer, idInfo);
+
+        append(itemContainer, editSaveContainer);
+        append(editSaveContainer, editButton);
+        append(editSaveContainer, saveButton);
+
+        numOfAnsParagraph.innerHTML = "Number Of Answers";
+        numOfAnsInput.value = element.answers.length;
+
+        questionTitleParagraph.innerHTML = "Question";
+        questionTitleInput.setAttribute("value", element.questionTitle);
+
+        correctAnsnwerParagraph.innerHTML = "Correct answer";
+
+        pointsParagraph.innerHTML = "Points";
+        pointsInput.setAttribute("value", element.pointsGiven);
+
+      
+        createdOnInfo.innerHTML = "Created on: " + element.createdOn;
+        editedAtInfo.innerHTML = "Edited on: " + element.editedOn;
+        idInfo.innerHTML = "Id: " + element.id;
+        
 
     });
 
@@ -162,6 +289,8 @@ async function postQuestion(url)
     const inputQuery = document.querySelectorAll("input[name=answer]");
     let arrAnswers = [];
 
+    const dateNow = getNowDate();
+
     inputQuery.forEach(function(input) {
         arrAnswers.push(input.value);
     });
@@ -173,8 +302,8 @@ async function postQuestion(url)
         answers: arrAnswers,
         correctAnswer : parseInt(correctAnsnwerOption.value),
         pointsGiven : parseInt(questionPoints.value),
-        createdOn: new Date(),
-        editedAt : ""
+        createdOn: dateNow,
+        editedOn : "-"
     }
 
     try 
@@ -191,6 +320,8 @@ async function postQuestion(url)
         if(response.ok)
         {
             mainContainerCreate.reset();
+            removeNodes(answersContainer);
+            removeNodes(correctAnsnwerOption);
         }
         else
         {
@@ -200,8 +331,26 @@ async function postQuestion(url)
     {
         alert(error);
     }
+}
 
+function getNowDate()
+{
+    const date = new Date();
 
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; 
+    let day = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds;
 }
 
 function createNode(element) {
