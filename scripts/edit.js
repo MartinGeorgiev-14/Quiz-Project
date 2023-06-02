@@ -1,5 +1,8 @@
 const url = "http://localhost:3000/questions";
+const questionUrl = "http://localhost:3000/questions/";
 let answerQuestionGlobal = 0;
+let editAnswerQuestionGlobal = 0;
+const navigationDiv = document.getElementById("top");
 const mainContainerCreate = document.getElementById("mainContainerCreate");
 const mainContainerEdit = document.getElementById("mainContainerEdit");
 const answersContainer = document.getElementById("answersContainer");
@@ -51,7 +54,7 @@ saveButton.addEventListener("click", function(event)
     event.preventDefault();
     let message = "";
     let isChecked = false;
-    let answerNum = 1;
+
     const inputQuery = document.querySelectorAll("input[name=answer]");
    
     //Checking for the quantity of asnwers
@@ -69,11 +72,9 @@ saveButton.addEventListener("click", function(event)
     //Checking if all input fields are used
     for (let i = 0; i < inputQuery.length; i++) {
 
-    
         if(!inputQuery[i].value)
         { 
-            message = message + ", Answer " + answerNum;
-            answerNum++;
+            message = message + ", Answer " + parseInt(i + 1);
             isChecked = true;
         }
     }
@@ -89,7 +90,7 @@ saveButton.addEventListener("click", function(event)
         alert("Enter quantity of points above 1");
         return;
     }
-    else if(questionPoints.value < 2)
+    else if(questionPoints.value < 1)
     {
         alert("The question must give at least 1 point");
         return;
@@ -127,13 +128,13 @@ async function getQuestions(url)
 // Displaying all questions in the database
 function displayQuestions(question)
 {
-    removeNodes(mainContainerEdit);
-    let questionIndex = 0;
+    removeNodesExeptFirstChild(mainContainerEdit, navigationDiv);
+    let questionIndex = 1;
     
     question.forEach(element => {
         let editAnswerCounter = 1;
 
-    
+        //Creating inputs for answers number and question title
         const numOfAnsLabel = createNode("label");
         const numOfAnsParagraph = createNode("p");
         const numOfAnsInput = createNode("input");
@@ -142,8 +143,9 @@ function displayQuestions(question)
         const questionTitleParagraph = createNode("p");
         const questionTitleInput = createNode("input");
 
-        const itemContainer = createNode("div");
-
+        const itemContainer = createNode("div");    //Creating div container for storing info for each question
+        const answersContainer = createNode("div"); //Creating div container for storing all answers
+        //Creating correct answer selector and points given input
         const answerOptionPointsContainer = createNode("div");
         const correctAnsnwerLabel = createNode("label");
         const correctAnsnwerParagraph = createNode("p");
@@ -152,31 +154,34 @@ function displayQuestions(question)
         const pointsLabel = createNode("label");
         const pointsParagraph = createNode("p");
         const pointsInput = createNode("input");
-
+        //Creating info container
         const infoContainer = createNode("div");
         const createdOnInfo = createNode("p");
         const editedAtInfo = createNode("p");
         const idInfo = createNode("p");
-
+        //Creating editing buttons
         const editSaveContainer = createNode("div");
         const editButton = createNode("button");
         const saveButton = createNode("button");
-
-        itemContainer.setAttribute("class", "EditAnswersContainer")
-
+        const deleteButton = createNode("button");
+        //Setting attributes to the div containers
+        itemContainer.setAttribute("class", "itemContainer");
+        answersContainer.setAttribute("class", "itemContainer");
+        answersContainer.setAttribute("name", "ansContainer");
+        //Setting attributes to inputs of answers number and question title
         numOfAnsLabel.setAttribute("class", "listContainer");
         numOfAnsLabel.setAttribute("id", "numberOfAnswers");
         numOfAnsInput.setAttribute("type", "number");
-        numOfAnsInput.setAttribute("name", "top" + element.id);
+        numOfAnsInput.setAttribute("name", "top");
         numOfAnsInput.setAttribute("disabled", "");
 
         questionTitleLabel.setAttribute("class", "listContainer");
-        questionTitleLabel.setAttribute("id", "questionTitle");
+        questionTitleLabel.setAttribute("id", "questionLabel");
         questionTitleInput.setAttribute("type", "text");
-        questionTitleInput.setAttribute("name", "top" + element.id);
+        questionTitleInput.setAttribute("name", "question");
         questionTitleInput.setAttribute("disabled", "");
         
-
+        //Setting attribute for selector of correct answer and input of points given
         answerOptionPointsContainer.setAttribute("id", "correctAnswerPointsOption");
         correctAnsnwerLabel.setAttribute("class", "listContainer");
         correctAnsnwerSelector.setAttribute("disabled", "");
@@ -184,20 +189,21 @@ function displayQuestions(question)
         pointsLabel.setAttribute("class", "listContainer");
         pointsInput.setAttribute("type", "number");
         pointsInput.setAttribute("disabled", "");
-
+        //Setting attribute to info container
         infoContainer.setAttribute("id", "info");
-
+        //Setting attributes to editing buttons
         editSaveContainer.setAttribute("id", "bottom");
         saveButton.setAttribute("disabled", "");
-        editButton.setAttribute("name", "bottom" + element.id);
-        saveButton.setAttribute("name", "" + element.id);
-
+        editButton.setAttribute("value", element.id);
+        saveButton.setAttribute("value", element.id);
+        deleteButton.setAttribute("value", element.id);
+        //Appending the each question container to the edit container
         append(mainContainerEdit,itemContainer);
-
+        //Appending the inputs of answers number and question title
         append(itemContainer, numOfAnsLabel);
         append(numOfAnsLabel, numOfAnsParagraph);
         append(numOfAnsLabel, numOfAnsInput);
-
+        
         append(itemContainer, questionTitleLabel);
         append(questionTitleLabel, questionTitleParagraph);
         append(questionTitleLabel, questionTitleInput);
@@ -205,28 +211,29 @@ function displayQuestions(question)
        
         for(let i = 0; i < element.answers.length; i++)
         {
-           
+            //Creating each question answer
             const answerLabel = createNode("label");
             const answerParagraph = createNode("p");
             const answerInput = createNode("input");
-            
+            //Setting attributes to each question answer
             answerLabel.setAttribute("class", "listContainer");
             answerInput.setAttribute("type", "text");
-            answerInput.setAttribute("name", "itemAnswer" + element.id);
+            answerInput.setAttribute("name", "itemAnswer" + questionIndex);
             answerInput.setAttribute("disabled", "");
-            
+            //Appending the elements for each answer
             append(answerLabel, answerParagraph);
             append(answerLabel, answerInput);
-            append(itemContainer, answerLabel);
-
+            append(answersContainer, answerLabel);
+            append(itemContainer, answersContainer);
+            //Setting the data for each answer
             answerParagraph.innerHTML = "Answer " + editAnswerCounter; 
             answerInput.setAttribute("value", element.answers[i]);
-
             editAnswerCounter++;
         }
 
         editAnswerCounter = 1;
 
+        //Appending the selector of correct answer and the input of given points
         append(itemContainer, answerOptionPointsContainer);
         append(answerOptionPointsContainer, correctAnsnwerLabel);
         append(correctAnsnwerLabel, correctAnsnwerParagraph);
@@ -237,18 +244,18 @@ function displayQuestions(question)
         append(pointsLabel, pointsInput);
 
         for(let i = 0; i < element.answers.length; i++)
-        {
-            let num = element.correctAnswer + 1;
+        {   //Creating each question answer an option
             const answerOption = createNode("option");
-
-            answerOption.setAttribute("value", element.correctAnswer);
-
+            //Setting attribute to each option
+            answerOption.setAttribute("value", i);
+            answerOption.setAttribute("name", "option");
+            //Appending each option to the selector of correct answer
             append(correctAnsnwerSelector, answerOption);
-            
-            answerOption.innerHTML = "Answer " + num;
-            
+            //Setting data for each option
+            answerOption.innerHTML = "Answer " + editAnswerCounter;
+            editAnswerCounter++;
         }
-
+        //Appending the info container and edit buttons container
         append(itemContainer, infoContainer);
         append(infoContainer, createdOnInfo);
         append(infoContainer, editedAtInfo);
@@ -257,25 +264,29 @@ function displayQuestions(question)
         append(itemContainer, editSaveContainer);
         append(editSaveContainer, editButton);
         append(editSaveContainer, saveButton);
-
+        append(editSaveContainer, deleteButton);
+        //Setting data to inputs of answers number and question title
         numOfAnsParagraph.innerHTML = "Number Of Answers";
         numOfAnsInput.value = element.answers.length;
 
         questionTitleParagraph.innerHTML = "Question";
         questionTitleInput.setAttribute("value", element.questionTitle);
-
+        //Setting data to selector of correct answer selector and input of given points
         correctAnsnwerParagraph.innerHTML = "Correct answer";
+        correctAnsnwerSelector.selectedIndex = element.correctAnswer;
 
         pointsParagraph.innerHTML = "Points";
         pointsInput.setAttribute("value", element.pointsGiven);
-
+        //Setting data to the info and edit buttons containers
         createdOnInfo.innerHTML = "Created on: " + element.createdOn;
         editedAtInfo.innerHTML = "Edited on: " + element.editedOn;
         idInfo.innerHTML = "Id: " + element.id;
 
         editButton.innerHTML = "Edit";
         saveButton.innerHTML = "Save";
+        deleteButton.innerHTML = "Delete";
         
+        //Enables to edit a certain question
         editButton.addEventListener("click", function(event)
         {
             saveButton.removeAttribute("disabled");
@@ -289,16 +300,109 @@ function displayQuestions(question)
                 element.removeAttribute("disabled");
             });
                 
+        });
+
+        //Adds/Removes answer and option
+        numOfAnsInput.addEventListener("input", function(event)
+        {   
+            let editAnswerCounter = 1;
+            removeNodes(answersContainer);
+            const currentQuestionIndex = element.id;
             for(let i = 0; i < numOfAnsInput.value; i++)
-            {
-                console.log(i);
+            {   
+                const answerLabel = createNode("label");
+                const answerParagraph = createNode("p");
+                const answerInput = createNode("input");
+
+                answerLabel.setAttribute("class", "listContainer");
+                answerInput.setAttribute("type", "text");
+                answerInput.setAttribute("name", "itemAnswer" + currentQuestionIndex);
+
+                append(answerLabel, answerParagraph);
+                append(answerLabel, answerInput);
+                append(answersContainer, answerLabel);
+                
+                //Checks if there is a question in the database
+                answerParagraph.innerHTML = "Answer " + editAnswerCounter;
+                if(element.answers[i] != undefined)
+                {
+                    answerInput.setAttribute("value", element.answers[i]);
+                }
+                else
+                {
+                    answerInput.setAttribute("value", "");
+                }
+                editAnswerQuestionGlobal++;
+                editAnswerCounter++;
             }
-           
-            
+
+            editAnswerCounter = 1;
+            removeNodes(correctAnsnwerSelector);
+            for(let i = 0; i < numOfAnsInput.value; i++)
+            {   
+                let correctAnswerNum = element.answers.length + 1;
+
+                const answerOption = createNode("option");
+
+                answerOption.setAttribute("value", i);
+
+                append(correctAnsnwerSelector, answerOption);
+
+                answerOption.innerHTML = "Answer " + editAnswerCounter;
+                editAnswerCounter++;
+            }
+            correctAnsnwerSelector.selectedIndex = element.correctAnswer;
+
         })
 
+        questionIndex++;
+        editAnswerCounter = 1;
         saveButton.addEventListener("click", function(event)
-        {
+        {   
+            let message = "";
+            let isChecked = false;
+            const inputQuery = document.querySelectorAll(`input[name=itemAnswer${saveButton.value}]`);
+
+            editAnswerQuestionGlobal = numOfAnsInput.value;
+            //Checking for the quantity of asnwers
+            if(editAnswerQuestionGlobal < 2)
+            {
+                alert("You need to have at least 2 answers");
+                return;
+            }
+            //Checking if there is a question
+            if(!questionTitleInput.value)
+            {
+                alert("You must enter a question");
+                return;
+            }
+            //Checking if all input fields are used
+            for (let i = 0; i < inputQuery.length; i++) {
+               
+                if(!inputQuery[i].value)
+                { 
+                    message = message + ", Answer " + parseInt(i + 1);
+                    isChecked = true;
+                }
+            }
+
+            if(isChecked)
+            {
+                alert("Your questions: " + message + " are empty");
+                return;
+            }
+            //Checking if there is entered quantity if points
+            if(!pointsInput.value)
+            {
+                alert("Enter quantity of points above 1");
+                return;
+            }
+            else if(pointsInput.value < 1)
+            {
+                alert("The question must give at least 1 point");
+                return;
+            }
+            
             editButton.removeAttribute("disabled");
             saveButton.setAttribute("disabled", "");
 
@@ -309,12 +413,54 @@ function displayQuestions(question)
             enable.forEach(element => {
                 element.setAttribute("disabled", "");
             });
+            
+            putQuestion(questionTitleInput, inputQuery, correctAnsnwerSelector, pointsInput, element.createdOn ,saveButton.value);
         })
 
     });
-
+    
 }
 
+async function putQuestion(questionTitle, inputQuery, correctAnswer, pointsInput, createdOn, id)
+{   
+    let arrAnswers = [];
+
+    inputQuery.forEach(function(input) {
+        arrAnswers.push(input.value);
+    });
+
+    const dateNow = getNowDate();
+   
+    const data = {
+        questionType : "oneAnswer",
+        questionTitle: questionTitle.value,
+        answers: arrAnswers,
+        correctAnswer: parseInt(correctAnswer.value),
+        pointsGiven: parseInt(pointsInput.value),
+        createdOn: createdOn,
+        editedOn: dateNow
+    }
+    try 
+    {
+        const response = await fetch(questionUrl + id, 
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+        if(response.ok)
+        {
+            getQuestions(url);
+        }
+    } catch (error) 
+    {
+            alert(error);
+    }
+
+}
 
 //Posting a question in the database
 async function postQuestion(url)
@@ -397,9 +543,16 @@ function append(parent, el) {
 
 function removeNodes(element){
     while(element.firstChild)
-    {
+    {   
         element.removeChild(element.firstChild);
     }
+}
+
+function removeNodesExeptFirstChild(parent, child)
+{   
+    for (var i = child.length - 1; i > 0; i--) {
+        parent.removeChild(child[i]);
+      }
 }
 
 function removeAttributeDisabled(element){

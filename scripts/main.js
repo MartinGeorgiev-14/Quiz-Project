@@ -3,7 +3,7 @@ const startButton = document.getElementById("start");
 const mainContainer = document.getElementById("mainContainerMessage");
 let earnedPoints = 0;
 let totalPoints = 0;
-let numQuestion = 0;
+let numQuestion = 1;
 let questionsLenght;
 
 // Removing the start menu
@@ -119,6 +119,7 @@ async function displayQuestion(question)
                 displayResult();
                 return;
             }
+            numQuestion++;
             getQuestion(url);
         } 
 
@@ -192,7 +193,7 @@ function displayResult()
 
     homeButton.addEventListener("click", function(event)
     {   
-        numQuestion = 0;
+        numQuestion = 1;
         totalPoints = 0;
         earnedPoints = 0;
         removeNodes(mainContainer);
@@ -201,7 +202,7 @@ function displayResult()
 
     restartButton.addEventListener("click", function(event)
     {
-        numQuestion = 0;
+        numQuestion = 1;
         totalPoints = 0;
         earnedPoints = 0;
         removeNodes(mainContainer);
@@ -221,7 +222,6 @@ async function getQuestion(url)
     {
         if(response.ok)
         {
-            numQuestion++;
             mainContainer.setAttribute("id", "mainContainerQuestion");
             displayQuestion(responseData);
         }
