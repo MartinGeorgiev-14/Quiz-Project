@@ -181,35 +181,10 @@ sortPoints.addEventListener("click", function(event)
     }
     //Setting the rest button to default settings
     clickedSortId = false;
-    clickedSortCDate = false;
+    clickedSortCDate = true;
     clickedSortEDate = true;
     
 });
-
-//Getting all questions
-async function getQuestions(url)
-{
-    
-    const response = await fetch(url);
-    const responseData = await response.json();
-
-    try 
-    {
-        if(response.ok)
-        {
-            return displayQuestions(responseData);
-        }
-        else
-        {
-            throw new Error(response.statusText);    
-        }
-    } 
-    catch (error) 
-    {   
-        alert(error);
-        console.log(error)
-    }
-}
 
 // Displaying all questions in the database
 function displayQuestions(question)
@@ -261,27 +236,32 @@ function displayQuestions(question)
         numOfAnsInput.setAttribute("type", "number");
         numOfAnsInput.setAttribute("name", "top");
         numOfAnsInput.setAttribute("disabled", "");
-
+        numOfAnsInput.style.cursor = "not-allowed";
+        
         questionTitleLabel.setAttribute("class", "listContainer");
         questionTitleLabel.setAttribute("id", "questionLabel");
         questionTitleInput.setAttribute("type", "text");
         questionTitleInput.setAttribute("name", "question");
         questionTitleInput.setAttribute("disabled", "");
+        questionTitleInput.style.cursor = "not-allowed";
         
         //Setting attribute for selector of correct answer and input of points given
         answerOptionPointsContainer.setAttribute("id", "correctAnswerPointsOption");
         correctAnsnwerLabel.setAttribute("class", "listContainer");
         correctAnsnwerSelector.setAttribute("disabled", "");
+        correctAnsnwerSelector.style.cursor = "not-allowed";
 
         pointsLabel.setAttribute("class", "listContainer");
         pointsInput.setAttribute("type", "number");
         pointsInput.setAttribute("disabled", "");
+        pointsInput.style.cursor = "not-allowed";
         //Setting attribute to info container
         infoContainer.setAttribute("id", "info");
         //Setting attributes to editing buttons
         editSaveContainer.setAttribute("id", "bottom");
         saveButton.setAttribute("disabled", "");
         editButton.setAttribute("value", element.id);
+        saveButton.style.cursor = "not-allowed";
         saveButton.setAttribute("value", element.id);
         deleteButton.setAttribute("value", element.id);
         //Appending the each question container to the edit container
@@ -307,6 +287,7 @@ function displayQuestions(question)
             answerInput.setAttribute("type", "text");
             answerInput.setAttribute("name", "itemAnswer" + questionIndex);
             answerInput.setAttribute("disabled", "");
+            answerInput.style.cursor = "not-allowed";
             //Appending the elements for each answer
             append(answerLabel, answerParagraph);
             append(answerLabel, answerInput);
@@ -377,14 +358,21 @@ function displayQuestions(question)
         editButton.addEventListener("click", function(event)
         {
             saveButton.removeAttribute("disabled");
+            saveButton.style.cursor = "pointer";
             editButton.setAttribute("disabled", "");
-            
+            deleteButton.setAttribute("disabled", "");
+            editButton.style.cursor = "not-allowed";
+            deleteButton.style.cursor = "not-allowed";
+
+
             let disable = itemContainer.querySelectorAll("input");
             
             correctAnsnwerSelector.removeAttribute("disabled");
+            correctAnsnwerSelector.style.cursor = "";
 
             disable.forEach(element => {
                 element.removeAttribute("disabled");
+                element.style.cursor = "text";
             });
                 
         });
@@ -492,6 +480,7 @@ function displayQuestions(question)
             
             editButton.removeAttribute("disabled");
             saveButton.setAttribute("disabled", "");
+            deleteButton.removeAttribute("disabled");
 
             let enable = itemContainer.querySelectorAll("input");
             
@@ -502,12 +491,43 @@ function displayQuestions(question)
             });
             
             putQuestion(questionTitleInput, inputQuery, correctAnsnwerSelector, pointsInput, element.createdOn ,saveButton.value);
-        })
+        });
+
+        deleteButton.addEventListener("click", function(event)
+        {
+            deleteQuestion(questionUrl + deleteButton.value);
+        });
 
     });
     
 }
 
+//Getting all questions for the database
+async function getQuestions(url)
+{
+    
+    const response = await fetch(url);
+    const responseData = await response.json();
+
+    try 
+    {
+        if(response.ok)
+        {
+            return displayQuestions(responseData);
+        }
+        else
+        {
+            throw new Error(response.statusText);    
+        }
+    } 
+    catch (error) 
+    {   
+        alert(error);
+        console.log(error)
+    }
+}
+
+//Putting a question in the database
 async function putQuestion(questionTitle, inputQuery, correctAnswer, pointsInput, createdOn, id)
 {   
     let arrAnswers = [];
@@ -598,6 +618,27 @@ async function postQuestion(url)
     {
         alert(error);
     }
+}
+
+async function deleteQuestion(deleteUrl)
+{   
+    try{
+        const response = await fetch(deleteUrl, 
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+            })
+            if(response.ok)
+            {
+                getQuestions(url);
+            }
+        }
+        catch(error)
+        {
+            alert(error);
+        }
 }
 
 function getNowDate()

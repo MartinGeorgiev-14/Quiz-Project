@@ -4,6 +4,7 @@ const mainContainer = document.getElementById("mainContainerMessage");
 let earnedPoints = 0;
 let totalPoints = 0;
 let numQuestion = 1;
+let questionCounter = 1;
 let questionsLenght;
 
 // Removing the start menu
@@ -74,7 +75,7 @@ async function displayQuestion(question)
     }
 
     questionTitle.innerHTML = question.questionTitle;
-    questionNum.innerHTML = numQuestion + "<span>/"+ questionsLenght + "</span>";
+    questionNum.innerHTML = questionCounter + "<span>/"+ questionsLenght + "</span>";
     questionPoints.innerHTML = "<span>Points: </span>" + question.pointsGiven;
 
     //Creating and appending the question inputs
@@ -114,12 +115,13 @@ async function displayQuestion(question)
 
             totalPoints += question.pointsGiven;
            
-            if(numQuestion === questionsLenght)
+            if(questionCounter === questionsLenght)
             {   
                 removeNodes(mainContainer);
                 displayResult();
                 return;
             }
+            questionCounter++;
             numQuestion++;
             getQuestion(url);
         } 
@@ -194,18 +196,14 @@ function displayResult()
 
     homeButton.addEventListener("click", function(event)
     {   
-        numQuestion = 1;
-        totalPoints = 0;
-        earnedPoints = 0;
+        setCountersToDefault();
         removeNodes(mainContainer);
         displayHome();
     })
 
     restartButton.addEventListener("click", function(event)
     {
-        numQuestion = 1;
-        totalPoints = 0;
-        earnedPoints = 0;
+        setCountersToDefault();
         removeNodes(mainContainer);
         getQuestion(url);
     });
@@ -218,9 +216,14 @@ async function getQuestion(url)
     
     const response = await fetch(url + numQuestion);
     const responseData = await response.json();
-
+   
     try 
-    {
+    {   
+        if(!response.ok)
+        {   
+            numQuestion++;
+            getQuestion(url);
+        }
         if(response.ok)
         {
             mainContainer.setAttribute("id", "mainContainerQuestion");
@@ -232,7 +235,7 @@ async function getQuestion(url)
         }
     } 
     catch (error) 
-    {   
+    {   console.log(error);
         notFound();
 
     }
@@ -240,6 +243,7 @@ async function getQuestion(url)
 
 function notFound()
 {
+    removeNodes(mainContainer);
     const noData = createNode("div");
     const homeButton = createNode("button");
 
@@ -341,6 +345,13 @@ function getGrade()
    }
 }
 
+function setCountersToDefault()
+{
+    numQuestion = 1;
+    questionCounter = 1;
+    totalPoints = 0;
+    earnedPoints = 0;
+}
 
 
 

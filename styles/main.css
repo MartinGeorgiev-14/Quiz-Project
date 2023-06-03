@@ -1,7 +1,10 @@
 :root{
-    --text-color: gold;
-    --button-text-color: black;
-    --header-color: red;
+    --blue-color: #05386B;
+    --dark-green: #379683;
+    --medium-green: #5CDB95;
+    --light-green: #8EE4AF;
+    --white-color: #EDF5E1;
+    --header-color: #05386B;
     --header-border-color: dimgray;
 }
 
@@ -14,6 +17,7 @@
 html, body {
     width: 100%;
     height: 100vh;
+    background-color: var(--medium-green);
 }
 
 .heading{
@@ -22,23 +26,31 @@ html, body {
     justify-content: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--header-border-color);
+    background-color: var(--medium-green);
+}
+
+.heading h2{
+    color: var(--blue-color);
+    font-size: 2.5rem;
+    
 }
 
 .heading a {
     position: absolute;
     right: 3%;
     text-decoration: none;
-    color: var(--button-text-color  );
-    background-color: aqua;
+    text-align: center;
+    color: var(--white-color);
+    background-color: var(--blue-color);
     padding: 0.5rem;
+    width: 5rem;
     font-weight: bold;
-    border: 1px solid black;
+    font-size: 1.3rem;
     border-radius: 10px;
 }
 
 .heading a:hover{
-    background-color: rgb(159, 255, 255);
+    color: var(--medium-green);
     transition: ease-in-out 0.1s;
 }
 
@@ -56,8 +68,8 @@ main{
     justify-content: center;
     flex-direction: column;
     gap: 10rem;
-    background-color: brown;
-    margin-top: 4rem;
+    background-color: var(--blue-color);
+    margin-top: 2rem;
     border-radius: 1.5rem;
     width: 90%;
     height: 100%;
@@ -65,22 +77,23 @@ main{
 
 #mainContainerMessage h1{
     font-size: 4rem;
-    color: var(--text-color);
+    color: var(--white-color); 
+
 }
 
 #mainContainerMessage button{
-    background-color: aqua;
+    background-color: var(--medium-green);
     width: 15%;
     padding: 0.5rem;
     font-weight: bold;
-    border: 1px solid black;
+    border: none;
     border-radius: 10px;
     font-size: 2rem;
     cursor: pointer;
 }
 
 #mainContainerMessage button:hover{
-    background-color: rgb(160, 255, 255);
+    background-color: var(--light-green);
 }
 
 /*End of welcome message and button*/
@@ -92,8 +105,8 @@ main{
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: brown;
-    margin-top: 4rem;
+    background-color: var(--blue-color);
+    margin-top: 2rem;
     border-radius: 1.5rem;
     width: 90%;
     height: 100%;
@@ -102,7 +115,9 @@ main{
 #mainContainerQuestion #top{
     display: flex;
     align-items: center;
-    padding-top: 1rem;    
+    padding-top: 1rem;   
+    color: var(--white-color); 
+    
 }
 
 #top h1{
@@ -120,7 +135,6 @@ main{
 }
 
 #questionForm{
-    background-color: burlywood;
     height: 80%;
     width: 90%;
     display: flex;
@@ -132,14 +146,31 @@ main{
 
 #mainContainerQuestion .container{
     font-size: 2rem;
-    background-color: aqua;
+    background-color: var(--medium-green);
+    border-radius: 1rem;
     width: 90%;
+    height: 3rem;
     display: flex;
 }
 
-#mainContainerQuestion .container p{
-    margin-left: 0.3rem;
+#mainContainerQuestion .container:hover{
+    background-color: var(--light-green);
+    cursor: pointer;
 }
+
+#mainContainerQuestion .container p{
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    
+}
+
+.container input{
+    margin-left: 1rem;
+    accent-color: var(--dark-green);
+    width: 1.2rem;
+}
+
 
 #bottom{
     display: flex;
@@ -150,6 +181,7 @@ main{
 
 #bottom p {
     font-size: 1.5rem;
+    color: white;
 }
 
 #bottom p span{
@@ -157,11 +189,11 @@ main{
 }
 
 #nextFinish{
-    background-color: aqua;
+    background-color: var(--medium-green);
+    border: none;
     width: 5rem;
     padding: 0.5rem;
     font-weight: bold;
-    border: 1px solid black;
     border-radius: 10px;
     font-size: 1.1rem;
 }
@@ -183,7 +215,7 @@ main{
     justify-content: center;
     flex-direction: column;
     gap: 10rem;
-    background-color: brown;
+    background-color: var(--blue-color);
     margin-top: 4rem;
     border-radius: 1.5rem;
     width: 90%;
@@ -200,6 +232,7 @@ main{
     list-style-type: none;
     font-size: 2rem;
     text-align: center;
+    color: var(--white-color);
 }
 
 #score ul::first-line{
@@ -209,25 +242,30 @@ main{
 
 #mainContainerResult h1{
     font-size: 4rem;
-    color: var(--text-color);
+    color: var(--white-color);
 }
 
 #buttonContainer{
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    
 }
 
 
 #mainContainerResult div button{
-    background-color: aqua;
+    background-color: var(--medium-green);
     width: 15%;
     padding: 0.5rem;
     font-weight: bold;
-    border: 1px solid black;
+    border: none;
     border-radius: 10px;
     font-size: 2rem;
     cursor: pointer;
+}
+
+#mainContainerResult div button:hover{
+   background-color: var(--light-green);
 }
 
 /*End of the results container */
