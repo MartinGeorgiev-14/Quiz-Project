@@ -37,6 +37,7 @@ function displayHome()
 // Displaying question
 async function displayQuestion(question)
 {
+    
     removeNodes(mainContainer);
 
     //Creating and appending the heading of the question and continue button
@@ -232,9 +233,32 @@ async function getQuestion(url)
     } 
     catch (error) 
     {   
-        alert(error);
-        console.log(error)
+        notFound();
+
     }
+}
+
+function notFound()
+{
+    const noData = createNode("div");
+    const homeButton = createNode("button");
+
+    noData.setAttribute = ("id", "missing");
+
+    homeButton.innerHTML = "Home";
+    noData.innerHTML = "Question not found";
+    append(mainContainer, noData);
+    append(mainContainer, homeButton);
+
+    homeButton.addEventListener("click", function(event)
+    {   
+        numQuestion = 1;
+        totalPoints = 0;
+        earnedPoints = 0;
+        removeNodes(mainContainer);
+        displayHome();
+    })
+    
 }
 
 // Getting the data lenght from data base

@@ -12,6 +12,10 @@ const correctAnswerOptionDiv = document.getElementById("correctAnswerOption");
 const correctAnsnwerOption = document.getElementById("correctAns");
 const questionPoints = document.getElementById("questionPoints");
 const saveButton = document.getElementById("saveButton");
+const sortId = document.getElementById("sortId");
+const sortCreatedDate = document.getElementById("sortCDate");
+const sortEditDate = document.getElementById("sortEDate");
+const sortPoints = document.getElementById("sortPoints");
 
 
 // Creating Answers
@@ -97,9 +101,91 @@ saveButton.addEventListener("click", function(event)
     }
 
     postQuestion(url);
-})
+});
 
 getQuestions(url);
+
+//Sorting by id
+let clickedSortId = false;
+sortId.addEventListener("click", function(event)
+{   //Checks how to sort
+    if(clickedSortId)
+    {   
+        clickedSortId = false;
+        sortQuestion("asc", "id", sortId)
+    }
+    else
+    {   
+        clickedSortId = true;
+        sortQuestion("desc", "id", sortId)
+    }
+    //Setting the rest button to default settings
+    clickedSortCDate = false;
+    clickedSortEDate = true;
+    clickedSortPoints = true;
+});
+
+//Sorting by Created date
+let clickedSortCDate = false;
+sortCreatedDate.addEventListener("click", function(event)
+{   //Checks how to sort
+    if(clickedSortCDate)
+    {   
+        clickedSortCDate = false;
+        sortQuestion("asc", "createdOn", sortCreatedDate);
+    }
+    else
+    {   
+        clickedSortCDate = true;
+        sortQuestion("desc", "createdOn", sortCreatedDate);
+    }
+    //Setting the rest button to default settings
+    clickedSortId = true;
+    clickedSortEDate = true;
+    clickedSortPoints = true;
+});
+
+//Sorting by Edited date
+let clickedSortEDate = true;
+sortEditDate.addEventListener("click", function(event)
+{   //Checks how to sort
+    if(clickedSortEDate)
+    {   
+        clickedSortEDate = false;
+        sortQuestion("asc", "editedOn", sortEditDate);
+    }
+    else
+    {   
+        clickedSortEDate = true;
+        sortQuestion("desc", "editedOn", sortEditDate);
+    }
+    //Setting the rest button to default settings
+    clickedSortId = true;
+    clickedSortCDate = true;
+    clickedSortPoints = true;
+});
+
+//Sorting by points
+let clickedSortPoints = true;
+sortPoints.addEventListener("click", function(event)
+{   //Checks how to sort
+    if(clickedSortPoints)
+    {   
+        clickedSortPoints = false;
+        sortQuestion("asc", "pointsGiven", sortPoints);
+    }
+    else
+    {   
+        clickedSortPoints = true;
+        sortQuestion("desc", "pointsGiven", sortPoints);
+    }
+    //Setting the rest button to default settings
+    clickedSortId = false;
+    clickedSortCDate = false;
+    clickedSortEDate = true;
+    
+});
+
 //Getting all questions
 async function getQuestions(url)
 {
@@ -127,8 +213,9 @@ async function getQuestions(url)
 
 // Displaying all questions in the database
 function displayQuestions(question)
-{
-    removeNodesExeptFirstChild(mainContainerEdit, navigationDiv);
+{  
+    
+    removeNodes(mainContainerEdit);
     let questionIndex = 1;
     
     question.forEach(element => {
@@ -560,4 +647,51 @@ function removeAttributeDisabled(element){
     {
         element.removeAttribute("disabled");
     }
+}
+
+function sortQuestion(order, stat, button) {
+
+    const iconRemover = navigationDiv.querySelectorAll("i");
+    
+    iconRemover.forEach(element => {
+        element.remove();
+    });
+
+    if(order == "asc")
+    {
+        const removeIcon = button.querySelector("i");
+        if(removeIcon)
+        {
+            removeIcon.remove();
+        }
+        const SortIcon = createNode("i");
+    
+        SortIcon.setAttribute("class", "fa-solid fa-sort-down");
+
+        append(button, SortIcon);
+    }
+    else
+    {
+        const removeIcon = button.querySelector("i");
+        if(removeIcon)
+        {
+            removeIcon.remove();
+        }
+       
+        const SortIcon = createNode("i");
+
+        SortIcon.setAttribute("class", "fa-solid fa-sort-up");
+
+        append(button, SortIcon);
+
+    }
+
+    getQuestions(`${url}?_sort=${stat}&_order=${order}`);
+}
+
+function clickToDefault(clickBool)
+{
+
+
+
 }

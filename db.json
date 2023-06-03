@@ -34,13 +34,13 @@
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": null,
+      "questionTitle": "title",
       "answers": [
         "sdfg",
         "dfg",
         "dsfg"
       ],
-      "correctAnswer": null,
+      "correctAnswer": 1,
       "pointsGiven": 33,
       "createdOn": "01/06/2023 23:12:37",
       "editedOn": "03/06/2023 00:07:20",
@@ -48,99 +48,44 @@
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": null,
+      "questionTitle": "asdfasdf",
       "answers": [
-        "234",
-        "345",
-        "345"
+        "asdfasdf",
+        "asdfasdfasd",
+        "fasdfasdf"
       ],
-      "correctAnswer": null,
+      "correctAnswer": 0,
       "pointsGiven": 3,
-      "createdOn": "01/06/2023 23:17:07",
-      "editedOn": "03/06/2023 00:07:29",
+      "createdOn": "03/06/2023 15:33:23",
+      "editedOn": "-",
       "id": 4
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "3",
+      "questionTitle": "wsef",
       "answers": [
-        "3",
-        "3",
-        "3"
+        "sdfa",
+        "sdfasdf",
+        "asdf"
       ],
-      "correctAnswer": 2,
+      "correctAnswer": 0,
       "pointsGiven": 3,
-      "createdOn": "01/06/2023 23:19:09",
+      "createdOn": "03/06/2023 15:34:54",
       "editedOn": "-",
       "id": 5
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "2",
+      "questionTitle": "f",
       "answers": [
-        "2",
-        "2"
-      ],
-      "correctAnswer": 1,
-      "pointsGiven": 2,
-      "createdOn": "01/06/2023 23:20:28",
-      "editedOn": "-",
-      "id": 6
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "2",
-      "answers": [
-        "2",
-        "2"
-      ],
-      "correctAnswer": 1,
-      "pointsGiven": 2,
-      "createdOn": "01/06/2023 23:20:44",
-      "editedOn": "-",
-      "id": 7
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "4",
-      "answers": [
-        "4",
-        "4",
-        "4",
-        "4"
-      ],
-      "correctAnswer": 3,
-      "pointsGiven": 4,
-      "createdOn": "01/06/2023 23:22:26",
-      "editedOn": "-",
-      "id": 8
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "2",
-      "answers": [
-        "2",
-        "2"
-      ],
-      "correctAnswer": 1,
-      "pointsGiven": 3,
-      "createdOn": "01/06/2023 23:24:11",
-      "editedOn": "-",
-      "id": 9
-    },
-    {
-      "questionType": "oneAnswer",
-      "questionTitle": "Dali obicham banichki",
-      "answers": [
-        "da",
-        "ne",
-        "neznam"
+        "asdf",
+        "sadf"
       ],
       "correctAnswer": 0,
-      "pointsGiven": 100,
-      "createdOn": "01/06/2023 23:24:37",
+      "pointsGiven": 323,
+      "createdOn": "03/06/2023 15:35:12",
       "editedOn": "-",
-      "id": 10
+      "id": 6
     }
   ]
 }
