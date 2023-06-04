@@ -2,45 +2,110 @@
   "questions": [
     {
       "questionType": "oneAnswer",
-      "questionTitle": "asdasdasdasd",
+      "questionTitle": "Which is the capital of Sofia?",
       "answers": [
-        "fdgdfgdf",
-        "sadfsdf",
-        "fdgdfgdf",
-        "sadfsdf"
+        "Veliko Tarnovo",
+        "Sofia",
+        "Pernik",
+        "Varna"
       ],
       "correctAnswer": 1,
-      "pointsGiven": 10,
-      "createdOn": "01/06/2023 23:11:51",
-      "editedOn": "03/06/2023 21:38:29",
+      "pointsGiven": 6,
+      "createdOn": "04/06/2023 18:30:03",
+      "editedOn": "04/06/2023 18:58:36",
       "id": 1
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "wsef",
+      "questionTitle": "In which continent Bulgaria is located?",
       "answers": [
-        "sdfa",
-        "sdfasdf",
-        "asdf"
+        "Asia",
+        "North America",
+        "South America",
+        "Antarctica",
+        "Europe",
+        "Australia",
+        "Africa"
+      ],
+      "correctAnswer": 4,
+      "pointsGiven": 11,
+      "createdOn": "04/06/2023 18:35:06",
+      "editedOn": "04/06/2023 18:38:44",
+      "id": 2
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "Can birds fly?",
+      "answers": [
+        "Yes",
+        "No"
       ],
       "correctAnswer": 0,
-      "pointsGiven": 3,
-      "createdOn": "03/06/2023 15:34:54",
+      "pointsGiven": 2,
+      "createdOn": "04/06/2023 18:38:33",
+      "editedOn": "-",
+      "id": 3
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "How much keys a keyboard has?",
+      "answers": [
+        "98",
+        "88",
+        "90",
+        "102",
+        "101"
+      ],
+      "correctAnswer": 4,
+      "pointsGiven": 8,
+      "createdOn": "04/06/2023 18:40:00",
+      "editedOn": "-",
+      "id": 4
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "Which is the only edible food that never goes bad?",
+      "answers": [
+        "Meat",
+        "Wheat",
+        "Honey",
+        "Sugar",
+        "Rice"
+      ],
+      "correctAnswer": 2,
+      "pointsGiven": 13,
+      "createdOn": "04/06/2023 18:45:45",
       "editedOn": "-",
       "id": 5
     },
     {
       "questionType": "oneAnswer",
-      "questionTitle": "f",
+      "questionTitle": "How long is an Olympic swimming pool (in meters)?",
       "answers": [
-        "asdf",
-        "sadf"
+        "45",
+        "50",
+        "100"
       ],
-      "correctAnswer": 0,
-      "pointsGiven": 323,
-      "createdOn": "03/06/2023 15:35:12",
+      "correctAnswer": 1,
+      "pointsGiven": 5,
+      "createdOn": "04/06/2023 19:22:19",
       "editedOn": "-",
       "id": 6
+    },
+    {
+      "questionType": "oneAnswer",
+      "questionTitle": "Which animal can be seen on the Porsche logo?",
+      "answers": [
+        "Lion",
+        "Grifin",
+        "Horse",
+        "Bull"
+      ],
+      "correctAnswer": 2,
+      "pointsGiven": 3,
+      "createdOn": "04/06/2023 19:23:14",
+      "editedOn": "-",
+      "id": 7
     }
   ]
 }

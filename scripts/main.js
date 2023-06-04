@@ -43,7 +43,7 @@ async function displayQuestion(question)
 
     //Creating and appending the heading of the question and continue button
     const questionIndicator = createNode("div");
-    const questionTitle = createNode("h2");
+    const questionTitle = createNode("h1");
     const questionNum = createNode("p");
     const questionForm = createNode("form");
     const questionBottom = createNode("div");
@@ -219,25 +219,26 @@ async function getQuestion(url)
    
     try 
     {   
-        if(!response.ok)
-        {   
-            numQuestion++;
-            getQuestion(url);
-        }
+    
         if(response.ok)
         {
             mainContainer.setAttribute("id", "mainContainerQuestion");
             displayQuestion(responseData);
         }
+        else if(response.status === 404)
+        {
+            numQuestion++;
+            getQuestion(url);  
+        }
         else
         {
-            throw new Error(response.statusText);    
+            throw new Error(response.statusText);  
         }
     } 
     catch (error) 
-    {   console.log(error);
+    {  
+        console.log(error);
         notFound();
-
     }
 }
 

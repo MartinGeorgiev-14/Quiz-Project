@@ -1,22 +1,25 @@
 const url = "http://localhost:3000/questions";
 const questionUrl = "http://localhost:3000/questions/";
+
 let answerQuestionGlobal = 0;
 let editAnswerQuestionGlobal = 0;
-const navigationDiv = document.getElementById("top");
+//Create Container
 const mainContainerCreate = document.getElementById("mainContainerCreate");
-const mainContainerEdit = document.getElementById("mainContainerEdit");
-const answersContainer = document.getElementById("answersContainer");
 const numberAnswers = document.getElementById("numberAns");
 const question = document.getElementById("question");
 const correctAnswerOptionDiv = document.getElementById("correctAnswerOption");
 const correctAnsnwerOption = document.getElementById("correctAns");
 const questionPoints = document.getElementById("questionPoints");
 const saveButton = document.getElementById("saveButton");
+//EditContainer
+const mainContainerEdit = document.getElementById("mainContainerEdit");
+const navigationDiv = document.getElementById("top");
+const answersContainer = document.getElementById("answersContainer");
+
 const sortId = document.getElementById("sortId");
 const sortCreatedDate = document.getElementById("sortCDate");
 const sortEditDate = document.getElementById("sortEDate");
 const sortPoints = document.getElementById("sortPoints");
-
 
 // Creating Answers
 numberAnswers.addEventListener("input", function(event)
@@ -311,6 +314,7 @@ function displayQuestions(question)
         append(pointsLabel, pointsParagraph);
         append(pointsLabel, pointsInput);
 
+    
         for(let i = 0; i < element.answers.length; i++)
         {   //Creating each question answer an option
             const answerOption = createNode("option");
@@ -619,7 +623,7 @@ async function postQuestion(url)
         alert(error);
     }
 }
-
+//Deleting a question in the database
 async function deleteQuestion(deleteUrl)
 {   
     try{
@@ -640,7 +644,7 @@ async function deleteQuestion(deleteUrl)
             alert(error);
         }
 }
-
+//Getting a formated date
 function getNowDate()
 {
     const date = new Date();
@@ -668,14 +672,14 @@ function createNode(element) {
 function append(parent, el) {
     return parent.appendChild(el);
 }
-
+//Removing all child elements
 function removeNodes(element){
     while(element.firstChild)
     {   
         element.removeChild(element.firstChild);
     }
 }
-
+//Removing all child exept first
 function removeNodesExeptFirstChild(parent, child)
 {   
     for (var i = child.length - 1; i > 0; i--) {
@@ -689,7 +693,7 @@ function removeAttributeDisabled(element){
         element.removeAttribute("disabled");
     }
 }
-
+//Sorting the questions
 function sortQuestion(order, stat, button) {
 
     const iconRemover = navigationDiv.querySelectorAll("i");
@@ -697,7 +701,7 @@ function sortQuestion(order, stat, button) {
     iconRemover.forEach(element => {
         element.remove();
     });
-
+    //checking which icon to choose
     if(order == "asc")
     {
         const removeIcon = button.querySelector("i");
@@ -730,9 +734,3 @@ function sortQuestion(order, stat, button) {
     getQuestions(`${url}?_sort=${stat}&_order=${order}`);
 }
 
-function clickToDefault(clickBool)
-{
-
-
-
-}
