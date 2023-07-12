@@ -22,5 +22,5 @@ This project was initialized using the following dependencies:
 ## Project setup
 
 1. Install Node.js (leatest version)
-2. Install globally json-server (open cmd and perform this command "npm install -g json-server")
-3. Start the database (db.json) by opening cmd in the directory of the app and performing the following command "json-server --watch db.json". You can access the server with "http://localhost:3000" 
+2. Install globally json-server (open cmd and perform the following command "npm install -g json-server")
+3. Start the database (db.json) by opening cmd in the directory of the app and enter the following command "json-server --watch db.json". You can access the server with "http://localhost:3000" 
